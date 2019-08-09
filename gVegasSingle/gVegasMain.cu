@@ -45,7 +45,7 @@ int main(int argc, char** argv)
    int ncall0 = 256;
    int itmx0 = 10;
    int nacc  = 1;
-   int nBlockSize0 = 256;
+   int nBlockSize0 = 192;
 
    // cutGetCmdLineArgumenti(argc, (const char**)argv, "n", &ncall0);
    // cutGetCmdLineArgumenti(argc, (const char**)argv, "i", &itmx0);
@@ -60,7 +60,7 @@ int main(int argc, char** argv)
    cudaSetDevice(0);
 
    mds = 1;
-   ndim = 6;
+   ndim = 7;
    
    ng = 0;
    npg = 0;
