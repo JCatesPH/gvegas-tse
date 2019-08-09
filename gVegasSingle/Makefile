@@ -76,11 +76,10 @@ OBJS =  $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(CPP_FILES)))
 OBJS += $(patsubst %.cu,$(OBJ_DIR)/%.cu.o,$(notdir $(CU_FILES)))
 
 $(EXECUTABLE) : $(OBJS)
-	-o $@ $?
+	gcc -o $@ $?
 
 $(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(CUH_FILES)
-	$@ $<
-	touch	$@
+	nvcc $@ $<
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(H_FILES)
-	$@ $<
+	gcc $@ $<
