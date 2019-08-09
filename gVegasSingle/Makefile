@@ -76,11 +76,11 @@ OBJS =  $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(CPP_FILES)))
 OBJS += $(patsubst %.cu,$(OBJ_DIR)/%.cu.o,$(notdir $(CU_FILES)))
 
 $(EXECUTABLE) : $(OBJS)
-    echo "linking rule : " -o $@ $?
+	-o $@ $?
 
 $(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(CUH_FILES)
-    echo ".cu.o rule : " $@ $<
-    touch	$@
+	$@ $<
+	touch	$@
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(H_FILES)
-    echo ".o rule : " $@ $<
+	$@ $<
