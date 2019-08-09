@@ -60,20 +60,17 @@ CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0
 ################################################################################
 # Rules and targets
 
-SRC_DIR   = src
-OBJ_DIR   = obj
+$(EXECUTABLE) : gVegasMain.o gVegas.o gVegasCallFunc.o gVegasFunc.o
+	gcc -o $@ gVegasMain.o gVegas.o gVegasCallFunc.o gVegasFunc.o kernels.h xorshift.cu
 
-CU_FILES  = $(wildcard $(SRC_DIR)/*.cu)
-H_FILES   = $(wildcard $(SRC_DIR)/*.h)
+gVegasMain.o  :  gVegasMain.cu kernels.h vegas.h gvegas.h
+	nvcc -o gVegasMain.o gVegasMain.cu kernels.h vegas.h gvegas.h
 
-OBJ_FILES = $(addprefix $(OBJ_DIR)/,$(notdir $(CPP_FILES:.cpp=.o)))
-CUO_FILES = $(addprefix $(OBJ_DIR)/,$(notdir $(CU_FILES:.cu=.
+gVegas.o  :  gVegas.cu kernels.h vegas.h gvegas.h vegasconst.h
+	nvcc -o gVegas.o gVegas.cu kernels.h vegas.h gvegas.h vegasconst.h
 
-OBJS =  $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(CPP_FILES)))
-OBJS += $(patsubst %.cu,$(OBJ_DIR)/%.cu.o,$(notdir $(CU_FILES)))
+gVegasCallFunc.o  :  gVegasCallFunc.cu vegas.h vegasconst.h
+	nvcc -o gVegasCallFunc.o gVegasCallFunc.cu vegas.h vegasconst.h
 
-$(EXECUTABLE) : $(OBJS)
-	gcc -o $@ $?
-
-$(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(H_FILES)
-	nvcc $@ $?
+gVegasFunc.o : gVegasFunc.cu vegasconst.h
+	nvcc -o gVegasFunc.o gVegasFunc.cu vegasconst.h
