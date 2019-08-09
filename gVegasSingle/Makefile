@@ -61,16 +61,17 @@ CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0
 # Rules and targets
 
 $(EXECUTABLE) : gVegasMain.o gVegas.o gVegasCallFunc.o gVegasFunc.o
-	gcc -o $@ gVegasMain.o gVegas.o gVegasCallFunc.o gVegasFunc.o kernels.h xorshift.cu
+	gcc -o $@ gVegasMain.o gVegas.o gVegasCallFunc.o gVegasFunc.o 
 
-gVegasMain.o  :  gVegasMain.cu kernels.h vegas.h gvegas.h
-	nvcc -o gVegasMain.o gVegasMain.cu kernels.h vegas.h gvegas.h
-
-gVegas.o  :  gVegas.cu kernels.h vegas.h gvegas.h vegasconst.h
-	nvcc -o gVegas.o gVegas.cu kernels.h vegas.h gvegas.h vegasconst.h
+gVegasFunc.o : gVegasFunc.cu vegasconst.h
+	nvcc -o gVegasFunc.o gVegasFunc.cu vegasconst.h
 
 gVegasCallFunc.o  :  gVegasCallFunc.cu vegas.h vegasconst.h
 	nvcc -o gVegasCallFunc.o gVegasCallFunc.cu vegas.h vegasconst.h
 
-gVegasFunc.o : gVegasFunc.cu vegasconst.h
-	nvcc -o gVegasFunc.o gVegasFunc.cu vegasconst.h
+gVegasMain.o  :  gVegasMain.cu kernels.h vegas.h gvegas.h xorshift.cu
+	nvcc -o gVegasMain.o gVegasMain.cu kernels.h vegas.h gvegas.h xorshift.cu
+
+gVegas.o  :  gVegas.cu kernels.h vegas.h gvegas.h vegasconst.h xorshift.cu
+	nvcc -o gVegas.o gVegas.cu kernels.h vegas.h gvegas.h vegasconst.h xorshift.cu
+
