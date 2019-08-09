@@ -81,7 +81,7 @@ $(TARGET) : $(OBJS)
 
 $(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(CUH_FILES)
     echo ".cu.o rule : " $@ $<
-    touch $@
+    touch	$@
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(H_FILES)
     echo ".o rule : " $@ $<
