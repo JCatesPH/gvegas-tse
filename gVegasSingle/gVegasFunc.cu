@@ -8,7 +8,7 @@ float func(float* rx, float wgt)
    for (int i=0;i<7;i++) {
       value += rx[i];
    }
-   return cosf(value);
+   return __cosf(value);
 
 }
 
