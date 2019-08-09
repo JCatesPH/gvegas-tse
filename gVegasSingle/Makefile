@@ -76,4 +76,4 @@ $(EXECUTABLE) : $(OBJS)
 	gcc -o $@ $?
 
 $(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(H_FILES)
-	nvcc -o $@ $?
+	nvcc $@ $?
