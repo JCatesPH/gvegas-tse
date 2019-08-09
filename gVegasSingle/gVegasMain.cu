@@ -47,17 +47,17 @@ int main(int argc, char** argv)
    int nacc  = 1;
    int nBlockSize0 = 256;
 
-   cutGetCmdLineArgumenti(argc, (const char**)argv, "n", &ncall0);
-   cutGetCmdLineArgumenti(argc, (const char**)argv, "i", &itmx0);
-   cutGetCmdLineArgumenti(argc, (const char**)argv, "a", &nacc);
-   cutGetCmdLineArgumenti(argc, (const char**)argv, "b", &nBlockSize0);
+   // cutGetCmdLineArgumenti(argc, (const char**)argv, "n", &ncall0);
+   // cutGetCmdLineArgumenti(argc, (const char**)argv, "i", &itmx0);
+   // cutGetCmdLineArgumenti(argc, (const char**)argv, "a", &nacc);
+   // cutGetCmdLineArgumenti(argc, (const char**)argv, "b", &nBlockSize0);
 
    ncall = ncall0*1024;
    itmx = itmx0;
    acc = (float)nacc*0.00001f;
    nBlockSize = nBlockSize0;
 
-   cutilSafeCallNoSync(cudaSetDevice(0));
+   cudaSetDevice(0);
 
    mds = 1;
    ndim = 8;

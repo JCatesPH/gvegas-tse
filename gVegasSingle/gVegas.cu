@@ -44,13 +44,13 @@ void gVegas(double& avgi, double& sd, double& chi2a)
       
    }
    std::cout<<"ng = "<<ng<<std::endl;
-   cutilSafeCall(cudaMemcpyToSymbol(g_ndim, &ndim, sizeof(int)));
-   cutilSafeCall(cudaMemcpyToSymbol(g_ng,   &ng,   sizeof(int)));
-   cutilSafeCall(cudaMemcpyToSymbol(g_nd,   &nd,   sizeof(int)));
+   cudaMemcpyToSymbol(g_ndim, &ndim, sizeof(int));
+   cudaMemcpyToSymbol(g_ng,   &ng,   sizeof(int));
+   cudaMemcpyToSymbol(g_nd,   &nd,   sizeof(int));
    cudaThreadSynchronize(); // wait for synchronize
 
    nCubes = (unsigned)(pow(ng,ndim));
-   cutilSafeCall(cudaMemcpyToSymbol(g_nCubes, &nCubes, sizeof(nCubes)));
+   cudaMemcpyToSymbol(g_nCubes, &nCubes, sizeof(nCubes));
    cudaThreadSynchronize(); // wait for synchronize
 
    npg = ncall/nCubes;
@@ -84,9 +84,9 @@ void gVegas(double& avgi, double& sd, double& chi2a)
       xjac *= dx[j];
    }
 
-   cutilSafeCall(cudaMemcpyToSymbol(g_npg,  &npg,  sizeof(int)));
-   cutilSafeCall(cudaMemcpyToSymbol(g_xjac, &xjac, sizeof(float)));
-   cutilSafeCall(cudaMemcpyToSymbol(g_dxg,  &dxg,  sizeof(float)));
+   cudaMemcpyToSymbol(g_npg,  &npg,  sizeof(int));
+   cudaMemcpyToSymbol(g_xjac, &xjac, sizeof(float));
+   cudaMemcpyToSymbol(g_dxg,  &dxg,  sizeof(float));
    cudaThreadSynchronize(); // wait for synchronize
 
    ndo = 1;
@@ -129,9 +129,9 @@ void gVegas(double& avgi, double& sd, double& chi2a)
       
    }
 
-   cutilSafeCall(cudaMemcpyToSymbol(g_xl, xl, sizeof(xl)));
-   cutilSafeCall(cudaMemcpyToSymbol(g_dx, dx, sizeof(dx)));
-   cutilSafeCall(cudaMemcpyToSymbol(g_xi, xi, sizeof(xi)));
+   cudaMemcpyToSymbol(g_xl, xl, sizeof(xl));
+   cudaMemcpyToSymbol(g_dx, dx, sizeof(dx));
+   cudaMemcpyToSymbol(g_xi, xi, sizeof(xi));
    cudaThreadSynchronize(); // wait for synchronize
 
    if (nprn!=0) {
@@ -199,12 +199,12 @@ void gVegas(double& avgi, double& sd, double& chi2a)
 
    // CPU
    float* hFval;
-   cutilSafeCall(cudaMallocHost((void**)&hFval, sizeFval));
+   cudaMallocHost((void**)&hFval, sizeFval);
    memset(hFval, '\0', sizeFval);
 
    // GPU
    float* gFval;
-   cutilSafeCall(cudaMalloc((void**)&gFval, sizeFval));
+   cudaMalloc((void**)&gFval, sizeFval);
 
    // allocate IAval
    //   int sizeIAval = nCubeNpg*ndim*sizeof(unsigned short);
@@ -214,7 +214,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    // CPU
    //unsigned short* hIAval;
    int* hIAval;
-   cutilSafeCall(cudaMallocHost((void**)&hIAval, sizeIAval));
+   cudaMallocHost((void**)&hIAval, sizeIAval);
    //unsigned short* hIAval =
    //  (unsigned short*)calloc(nCubeNpg*ndim, sizeof(unsigned short));
    memset(hIAval, '\0', sizeIAval);
@@ -222,7 +222,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    // GPU
    // unsigned short* gIAval;
    int* gIAval;
-   cutilSafeCall(cudaMalloc((void**)&gIAval, sizeIAval));
+   cudaMalloc((void**)&gIAval, sizeIAval);
 
    double startVegasCall, endVegasCall;
    double startVegasMove, endVegasMove;
@@ -241,11 +241,11 @@ void gVegas(double& avgi, double& sd, double& chi2a)
       timeVegasCall += endVegasCall-startVegasCall;
 
       startVegasMove = getrusage_sec();
-      cutilSafeCall(cudaMemcpy(hFval, gFval,  sizeFval,
-                               cudaMemcpyDeviceToHost));
+      cudaMemcpy(hFval, gFval,  sizeFval,
+                               cudaMemcpyDeviceToHost);
 
-      cutilSafeCall(cudaMemcpy(hIAval, gIAval,  sizeIAval,
-                               cudaMemcpyDeviceToHost));
+      cudaMemcpy(hIAval, gIAval,  sizeIAval,
+                               cudaMemcpyDeviceToHost);
       endVegasMove = getrusage_sec();
       timeVegasMove += endVegasMove-startVegasMove;
 
@@ -437,7 +437,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
          xi[j][nd-1] = 1.f;
 
       }
-      cutilSafeCall(cudaMemcpyToSymbol(g_xi, xi, sizeof(xi)));
+      cudaMemcpyToSymbol(g_xi, xi, sizeof(xi));
       cudaThreadSynchronize(); // wait for synchronize
 
       endVegasRefine = getrusage_sec();
@@ -449,12 +449,12 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    } while (it<itmx && acc*fabs(avgi)<sd);
 
 
-   cutilSafeCall(cudaFreeHost(hFval));
-   cutilSafeCall(cudaFree(gFval));
+   cudaFreeHost(hFval);
+   cudaFree(gFval);
 
-   cutilSafeCall(cudaFreeHost(hIAval));
+   cudaFreeHost(hIAval);
 //   free(hIAval);
-   cutilSafeCall(cudaFree(gIAval));
+   cudaFree(gIAval);
 
    //   std::cout<<"ng = "<<ng<<std::endl;
 }
