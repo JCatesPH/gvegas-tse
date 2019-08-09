@@ -70,8 +70,8 @@ gVegasCallFunc.o  :  gVegasCallFunc.cu
 	nvcc -o gVegasCallFunc.o  gVegasCallFunc.cu
 
 gVegasMain.o  :  gVegasMain.cu xorshift.cu
-	nvcc -o gVegasMain.o  gVegasMain.cu    xorshift.cu
+	nvcc -o gVegasMain.o gVegasMain.cu xorshift.cu
 
 gVegas.o  :  gVegas.cu xorshift.cu
-	nvcc -o gVegas.o  gVegas.cu  xorshift.cu
+	nvcc -o gVegas.o gVegas.cu xorshift.cu
 

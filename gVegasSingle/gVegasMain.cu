@@ -6,7 +6,7 @@
 #include <sys/resource.h>
 
 // includes, project
-#include <cutil_inline.h>
+#include "cutil_inline.h"
 // include initial files
 
 #define __MAIN_LOGIC
