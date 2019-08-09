@@ -60,14 +60,14 @@ int main(int argc, char** argv)
    cudaSetDevice(0);
 
    mds = 1;
-   ndim = 8;
+   ndim = 6;
    
    ng = 0;
    npg = 0;
 
    for (int i=0;i<ndim;i++) {
       xl[i] = 0.;
-      xu[i] = 1.;
+      xu[i] = 10.;
    }
    
    nprn = 1;
