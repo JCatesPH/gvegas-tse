@@ -47,11 +47,11 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    cudaMemcpyToSymbol(g_ndim, &ndim, sizeof(int));
    cudaMemcpyToSymbol(g_ng,   &ng,   sizeof(int));
    cudaMemcpyToSymbol(g_nd,   &nd,   sizeof(int));
-   cudaThreadSynchronize(); // wait for synchronize
+   cudaDeviceSynchronize(); // wait for synchronize
 
    nCubes = (unsigned)(pow(ng,ndim));
    cudaMemcpyToSymbol(g_nCubes, &nCubes, sizeof(nCubes));
-   cudaThreadSynchronize(); // wait for synchronize
+   cudaDeviceSynchronize(); // wait for synchronize
 
    npg = ncall/nCubes;
    if (npg<2) npg = 2;
@@ -87,7 +87,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    cudaMemcpyToSymbol(g_npg,  &npg,  sizeof(int));
    cudaMemcpyToSymbol(g_xjac, &xjac, sizeof(float));
    cudaMemcpyToSymbol(g_dxg,  &dxg,  sizeof(float));
-   cudaThreadSynchronize(); // wait for synchronize
+   cudaDeviceSynchronize(); // wait for synchronize
 
    ndo = 1;
 
@@ -132,7 +132,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    cudaMemcpyToSymbol(g_xl, xl, sizeof(xl));
    cudaMemcpyToSymbol(g_dx, dx, sizeof(dx));
    cudaMemcpyToSymbol(g_xi, xi, sizeof(xi));
-   cudaThreadSynchronize(); // wait for synchronize
+   cudaDeviceSynchronize(); // wait for synchronize
 
    if (nprn!=0) {
       std::cout<<std::endl;
@@ -236,7 +236,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
 //      std::cout<<"call gVegasCallFunc: it = "<<it<<std::endl;
       startVegasCall = getrusage_sec();
       gVegasCallFunc<<<BkGd, ThBk>>>(gFval, gIAval);
-      cudaThreadSynchronize(); // wait for synchronize
+      cudaDeviceSynchronize(); // wait for synchronize
       endVegasCall = getrusage_sec();
       timeVegasCall += endVegasCall-startVegasCall;
 
@@ -438,7 +438,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
 
       }
       cudaMemcpyToSymbol(g_xi, xi, sizeof(xi));
-      cudaThreadSynchronize(); // wait for synchronize
+      cudaDeviceSynchronize(); // wait for synchronize
 
       endVegasRefine = getrusage_sec();
       timeVegasRefine += endVegasRefine-startVegasRefine;
