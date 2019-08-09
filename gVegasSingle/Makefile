@@ -61,6 +61,6 @@ CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0
 # Rules and targets
 
 $(EXECUTABLE) : gVegasMain.cu gVegas.cu gVegasCallFunc.cu gVegasFunc.cu
-	nvcc -o $@  gVegasMain.cu gVegas.cu gVegasCallFunc.cu gVegasFunc.cu xorshift.cu
+	nvcc -o $@  gVegasMain.cu 
 
 
