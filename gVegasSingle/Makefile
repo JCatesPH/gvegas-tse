@@ -63,11 +63,8 @@ CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0
 SRC_DIR   = src
 OBJ_DIR   = obj
 
-CPP_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 CU_FILES  = $(wildcard $(SRC_DIR)/*.cu)
-
 H_FILES   = $(wildcard $(SRC_DIR)/*.h)
-CUH_FILES = $(wildcard $(SRC_DIR)/*.cuh)
 
 OBJ_FILES = $(addprefix $(OBJ_DIR)/,$(notdir $(CPP_FILES:.cpp=.o)))
 CUO_FILES = $(addprefix $(OBJ_DIR)/,$(notdir $(CU_FILES:.cu=.
@@ -78,8 +75,5 @@ OBJS += $(patsubst %.cu,$(OBJ_DIR)/%.cu.o,$(notdir $(CU_FILES)))
 $(EXECUTABLE) : $(OBJS)
 	gcc -o $@ $?
 
-$(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(CUH_FILES)
-	nvcc $@ $?
-
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(H_FILES)
-	gcc $@ $?
+$(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(H_FILES)
+	nvcc -o $@ $?
