@@ -60,7 +60,6 @@ CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0
 ################################################################################
 # Rules and targets
 
-TARGET    = nothing
 SRC_DIR   = src
 OBJ_DIR   = obj
 
@@ -76,7 +75,7 @@ CUO_FILES = $(addprefix $(OBJ_DIR)/,$(notdir $(CU_FILES:.cu=.
 OBJS =  $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(CPP_FILES)))
 OBJS += $(patsubst %.cu,$(OBJ_DIR)/%.cu.o,$(notdir $(CU_FILES)))
 
-$(TARGET) : $(OBJS)
+$(EXECUTABLE) : $(OBJS)
     echo "linking rule : " -o $@ $?
 
 $(OBJ_DIR)/%.cu.o : $(SRC_DIR)/%.cu $(CUH_FILES)
