@@ -17,7 +17,7 @@ float func(float* rx, float wgt)
    value = rx[0] + rx[1] + rx[2] + rx[3] + rx[4] + rx[5] + rx[6];
    // result = cosf(value);
 
-   result = value * value * expf(-value * value / (2 * T * T)) / (T * T * T);
+   result = sqrtf(2 / 3.14159) * value * value * expf(-value * value / (2 * T * T)) / (T * T * T);
 
    return result;
 
