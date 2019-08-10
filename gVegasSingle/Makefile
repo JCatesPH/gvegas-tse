@@ -48,7 +48,7 @@ COMMONDIR := ../
 NREG = 74
 fastmath = 1
 maxregisters = ${NREG}
-CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0 
+#CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0 
 #SMVERSIONFLAGS := -arch sm_13
 #SMVERSIONFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0 --host-compilation c++  -D_DEBUG
 
@@ -58,9 +58,15 @@ CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0
 #USERENDERCHECKGL := 1
 
 ################################################################################
+# Custom flags for cuda compiler
+
+# For Virutal Architecture with Maxwell Support and GPU Features providing Volta Support
+CUDACCFLAGS := --ptxas-options=-v --gpu-architecture=compute_53 --gpu-code=sm_72
+
+################################################################################
 # Rules and targets
 
 $(EXECUTABLE) : gVegasMain.cu gVegas.cu gVegasCallFunc.cu gVegasFunc.cu
-	nvcc -o $@  gVegasMain.cu 
+	nvcc -o $@  gVegasMain.cu $(CUDACCFLAGS)
 
 
