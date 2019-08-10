@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 
    for (int i=0;i<ndim;i++) {
       xl[i] = 0.;
-      xu[i] = 10.;
+      xu[i] = 20.;
    }
    
    nprn = 1;
