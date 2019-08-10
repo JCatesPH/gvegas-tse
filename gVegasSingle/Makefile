@@ -60,8 +60,8 @@ maxregisters = ${NREG}
 ################################################################################
 # Custom flags for cuda compiler
 
-# For Virutal Architecture with Maxwell Support and GPU Features providing Volta Support
-CUDACCFLAGS := --ptxas-options=-v --gpu-architecture=compute_53 --gpu-code=sm_72
+# For Virutal Architecture with Maxwell Support and GPU Features providing Basic and Kepler Support
+CUDACCFLAGS := --ptxas-options=-v --gpu-architecture=compute_53 --gpu-code=sm_32
 
 ################################################################################
 # Rules and targets
