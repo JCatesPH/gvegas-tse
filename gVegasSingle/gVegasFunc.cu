@@ -5,6 +5,8 @@ float func(float* rx, float wgt)
 {
 
    float value = 0.f;
+   float cosval = 0.f;
+
    for (int i=0;i<7;i++) {
       value += rx[i];
    }
@@ -12,6 +14,7 @@ float func(float* rx, float wgt)
    cosval = __cosf(value);
 
    return cosval;
+   
 }
 
 /*
