@@ -61,7 +61,7 @@ maxregisters = ${NREG}
 # Custom flags for cuda compiler
 
 # For Virutal Architecture with Kepler Support and GPU Features providing Basic and Kepler Support
-CUDACCFLAGS := --ptxas-options=-v --gpu-architecture=compute_32 --gpu-code=sm_32
+CUDACCFLAGS := --ptxas-options=-v # --gpu-architecture=compute_32 --gpu-code=sm_32
 
 ################################################################################
 # Rules and targets
