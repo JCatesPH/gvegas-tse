@@ -6,7 +6,7 @@ float func(float* rx, float wgt)
 
    float value = 0.f;
    float result = 0.f;
-   float T = 1f;
+   float T = 1.f;
 
    /*
    for (int i=0;i<7;i++) {
