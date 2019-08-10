@@ -42,7 +42,7 @@ int main(int argc, char** argv)
    //   nBlockSize = nBlockSize0
    //
 
-   int ncall0 = 256;
+   int ncall0 = 1024;
    int itmx0 = 10;
    int nacc  = 1;
    int nBlockSize0 = 192;
