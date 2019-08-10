@@ -13,7 +13,7 @@ float func(float* rx, float wgt)
    }
    */
 
-   value = rx[0] + rx[1] + rx[2] + rx[3] + rx[4] + rx[5] + rx[6]
+   value = rx[0] + rx[1] + rx[2] + rx[3] + rx[4] + rx[5] + rx[6];
    cosval = cosf(value);
 
    return cosval;
