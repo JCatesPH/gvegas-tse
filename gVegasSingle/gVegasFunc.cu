@@ -5,7 +5,8 @@ float func(float* rx, float wgt)
 {
 
    float value = 0.f;
-   float cosval = 0.f;
+   float result = 0.f;
+   float T = 1.f;
 
    /*
    for (int i=0;i<7;i++) {
@@ -14,9 +15,11 @@ float func(float* rx, float wgt)
    */
 
    value = rx[0] + rx[1] + rx[2] + rx[3] + rx[4] + rx[5] + rx[6];
-   cosval = cosf(value);
+   // result = cosf(value);
 
-   return cosval;
+   result = value ** 2 * expf(-value ** 2 / (2 * T ** 2)) / (T ** 3);
+
+   return result;
 
 }
 
