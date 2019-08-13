@@ -62,8 +62,8 @@ int main(int argc, char** argv)
    //  Initialization
    //------------------
 
-   int itmx0 = 25;
-   int nBlockSize0 = 128;
+   int itmx0 = 40;
+   int nBlockSize0 = 224;
    int GPUdevice = 0;
 
    float acc0 = 0.0001f;
@@ -83,16 +83,16 @@ int main(int argc, char** argv)
    cudaSetDevice(GPUdevice);
 
    mds = 1; // WAS SET TO !. NOT SURE WHAT THIS PARAMETER DOES. SEE gVegas.cu
-   ndim = 5;
+   ndim = 7;
    
    ng = 0;
    npg = 0;
 
    for (int i=0;i<ndim;i++) {
       xl[i] = 0.;
-      xu[i] = 1.;
+      xu[i] = 10.;
    }
-   
+
    // This parameter, nprn, sets the print options. 0 : less printing
    nprn = 1;
 //   nprn = -1;
