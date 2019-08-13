@@ -10,13 +10,13 @@
 
 #include "gvegas.h"
 
-double getrusage_sec();
+#include "getrusage_sec.h"
 
 void gVegas(double& avgi, double& sd, double& chi2a)
 {
 
    for (int j=0;j<ndim;j++) {
-      xi[j][0] = 1.f;
+      xi[j][0] = 1.;
    }
 
    // entry vegas1
@@ -28,13 +28,10 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    ng = 1;
    
    npg = 0;
-   std::cout<<"mds = "<<mds<<std::endl;
    if (mds!=0) {
       
-      std::cout<<"ncall, ndim = "<<ncall<<", "<<ndim<<std::endl;
       ng = (int)pow((0.5*(double)ncall),1./(double)ndim);
       mds = 1;
-      //      printf("ng = %d\n",ng);
       if (2*ng>=nd_max) {
          mds = -1;
          npg = ng/nd_max+1;
@@ -43,27 +40,22 @@ void gVegas(double& avgi, double& sd, double& chi2a)
       }
       
    }
-   std::cout<<"ng = "<<ng<<std::endl;
    cudaMemcpyToSymbol(g_ndim, &ndim, sizeof(int));
    cudaMemcpyToSymbol(g_ng,   &ng,   sizeof(int));
    cudaMemcpyToSymbol(g_nd,   &nd,   sizeof(int));
-   cudaDeviceSynchronize(); // wait for synchronize
+   cudaThreadSynchronize(); // wait for synchronize
 
    nCubes = (unsigned)(pow(ng,ndim));
    cudaMemcpyToSymbol(g_nCubes, &nCubes, sizeof(nCubes));
-   cudaDeviceSynchronize(); // wait for synchronize
+   cudaThreadSynchronize(); // wait for synchronize
 
    npg = ncall/nCubes;
    if (npg<2) npg = 2;
    calls = (double)(npg*nCubes);
 
    unsigned nCubeNpg = nCubes*npg;
-   
-   //   std::cout<<"nCubes= "<<nCubes<<std::endl;
-   //   std::cout<<"nCubeNpg= "<<nCubeNpg<<std::endl;
 
    if (nprn!=0) {
-      // tsi = sqrt(tsi);
       std::cout<<std::endl;
       std::cout<<" << vegas internal parameters >>"<<std::endl;
       std::cout<<"            ng: "<<std::setw(5)<<ng<<std::endl;
@@ -73,21 +65,21 @@ void gVegas(double& avgi, double& sd, double& chi2a)
       std::cout<<"    nCubes*npg: "<<std::setw(12)<<nCubeNpg<<std::endl;
    }
    
-   dxg = 1.f/(float)ng;
+   dxg = 1./(double)ng;
    double dnpg = (double)npg;
    double dv2g = calls*calls*pow(dxg,ndim)*pow(dxg,ndim)/(dnpg*dnpg*(dnpg-1.));
-   xnd = (float)nd;
+   xnd = (double)nd;
    dxg *= xnd;
-   xjac = 1.f/(float)calls;
+   xjac = 1./(double)calls;
    for (int j=0;j<ndim;j++) {
       dx[j] = xu[j]-xl[j];
       xjac *= dx[j];
    }
 
    cudaMemcpyToSymbol(g_npg,  &npg,  sizeof(int));
-   cudaMemcpyToSymbol(g_xjac, &xjac, sizeof(float));
-   cudaMemcpyToSymbol(g_dxg,  &dxg,  sizeof(float));
-   cudaDeviceSynchronize(); // wait for synchronize
+   cudaMemcpyToSymbol(g_xjac, &xjac, sizeof(double));
+   cudaMemcpyToSymbol(g_dxg,  &dxg,  sizeof(double));
+   cudaThreadSynchronize(); // wait for synchronize
 
    ndo = 1;
 
@@ -105,7 +97,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
          dr += 1.;
          double xo = xn;
          xn = xi[j][k];
-         //         printf("xn = %g\n",xn);
+
          while (i<nd-1) {
 
             while (dr<=rc) {
@@ -120,9 +112,9 @@ void gVegas(double& avgi, double& sd, double& chi2a)
          }
          
          for (int i=0;i<nd-1;i++) {
-            xi[j][i] = (float)xin[i];
+            xi[j][i] = (double)xin[i];
          }
-         xi[j][nd-1] = 1.f;
+         xi[j][nd-1] = 1.;
 
       }
       ndo = nd;
@@ -132,7 +124,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    cudaMemcpyToSymbol(g_xl, xl, sizeof(xl));
    cudaMemcpyToSymbol(g_dx, dx, sizeof(dx));
    cudaMemcpyToSymbol(g_xi, xi, sizeof(xi));
-   cudaDeviceSynchronize(); // wait for synchronize
+   cudaThreadSynchronize(); // wait for synchronize
 
    if (nprn!=0) {
       std::cout<<std::endl;
@@ -159,10 +151,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    si2 = 0.;
    swgt = 0.;
    schi = 0.;
-   //   int iflag;
-   // main integration loop
 
-   //   std::cout<<"nBlockSize = "<<nBlockSize<<std::endl;
    //--------------------------
    //  Set up kernel vaiables
    //--------------------------
@@ -172,10 +161,8 @@ void gVegas(double& avgi, double& sd, double& chi2a)
 
    int nGridSizeX, nGridSizeY;
    int nBlockTot = (nCubeNpg-1)/nBlockSize+1;
-//   std::cout<<"nBlockTot = "<<nBlockTot<<std::endl;
    nGridSizeY = (nBlockTot-1)/nGridSizeMax+1;
    nGridSizeX = (nBlockTot-1)/nGridSizeY+1;
-//   std::cout<<"nGridSize (x,y) = "<<nGridSizeX<<", "<<nGridSizeY<<std::endl;
    dim3 BkGd(nGridSizeX, nGridSizeY);
 
    if (nprn!=0) {
@@ -194,33 +181,26 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    }
       
    // allocate Fval
-   int sizeFval = nCubeNpg*sizeof(float);
-//   std::cout<<"sizeFval = "<<sizeFval<<std::endl;
+   int sizeFval = nCubeNpg*sizeof(double);
 
    // CPU
-   float* hFval;
+   double* hFval;
    cudaMallocHost((void**)&hFval, sizeFval);
    memset(hFval, '\0', sizeFval);
 
    // GPU
-   float* gFval;
+   double* gFval;
    cudaMalloc((void**)&gFval, sizeFval);
 
    // allocate IAval
-   //   int sizeIAval = nCubeNpg*ndim*sizeof(unsigned short);
    int sizeIAval = nCubeNpg*ndim*sizeof(int);
-//   std::cout<<"sizeIAval = "<<sizeIAval<<std::endl;
 
    // CPU
-   //unsigned short* hIAval;
    int* hIAval;
    cudaMallocHost((void**)&hIAval, sizeIAval);
-   //unsigned short* hIAval =
-   //  (unsigned short*)calloc(nCubeNpg*ndim, sizeof(unsigned short));
    memset(hIAval, '\0', sizeIAval);
 
    // GPU
-   // unsigned short* gIAval;
    int* gIAval;
    cudaMalloc((void**)&gIAval, sizeIAval);
 
@@ -233,25 +213,24 @@ void gVegas(double& avgi, double& sd, double& chi2a)
       
       it++;
 
-//      std::cout<<"call gVegasCallFunc: it = "<<it<<std::endl;
-      startVegasCall = getrusage_sec();
+      startVegasCall = getrusage_usec();
       gVegasCallFunc<<<BkGd, ThBk>>>(gFval, gIAval);
-      cudaDeviceSynchronize(); // wait for synchronize
-      endVegasCall = getrusage_sec();
+      cudaThreadSynchronize(); // wait for synchronize
+      endVegasCall = getrusage_usec();
       timeVegasCall += endVegasCall-startVegasCall;
 
-      startVegasMove = getrusage_sec();
+      startVegasMove = getrusage_usec();
       cudaMemcpy(hFval, gFval,  sizeFval,
                                cudaMemcpyDeviceToHost);
 
       cudaMemcpy(hIAval, gIAval,  sizeIAval,
                                cudaMemcpyDeviceToHost);
-      endVegasMove = getrusage_sec();
+      endVegasMove = getrusage_usec();
       timeVegasMove += endVegasMove-startVegasMove;
 
 // *****************         
 
-      startVegasFill = getrusage_sec();
+      startVegasFill = getrusage_usec();
 
       ti = 0.;
       tsi = 0.;
@@ -269,52 +248,36 @@ void gVegas(double& avgi, double& sd, double& chi2a)
          double f2b = 0.;
          for (int ipg=0;ipg<npg;ipg++) {
             int idx = npg*ig+ipg;
-            double f = (double)hFval[idx];
-//            std::cout<<"idx,f = "<<idx<<", "<<std::scientific
-//                     <<std::setw(10)<<std::setprecision(5)<<f<<std::endl;
+            double f = hFval[idx];
             double f2 = f*f;
             fb += f;
             f2b += f2;
-            /*
-            for (int idim=0;idim<ndim;idim++) {
-               int iaj = hIAval[idim*nCubeNpg+idx];
-               d[idim][iaj] += f2;
-            }
-            */
          }
          f2b = sqrt(f2b*npg);
          f2b = (f2b-fb)*(f2b+fb);
          ti += fb;
          tsi += f2b;
          if (mds<0) {
+            int idx = npg*ig;
             for (int idim=0;idim<ndim;idim++) {
-               int idx = npg*ig;
                int iaj = hIAval[idim*nCubeNpg+idx];
                d[idim][iaj] += f2b;
             }
          }
       }
 
-//      std::cout<<"mds = "<<mds<<std::endl;
       if (mds>0) {
-         //         std::cout<<"ndim = "<<ndim<<std::endl;
          for (int idim=0;idim<ndim;idim++) {
-            //            std::cout<<"idim = "<<idim<<std::endl;
+            int idimCube = idim*nCubeNpg;
             for (int idx=0;idx<nCubeNpg;idx++) {
-               //               std::cout<<"idx = "<<idx<<std::endl;
-               int iaj = hIAval[idim*nCubeNpg+idx];
-               //               std::cout<<"iaj = "<<iaj<<std::endl;
-               double f = (double)hFval[idx];
-               //               std::cout<<"f = "<<f<<std::endl;
-               double f2 = f*f;
-               d[idim][iaj] += f2;
-               //               std::cout<<"idim, iaj, idx, f = "<<idim<<", "<<iaj
-               //                        <<", "<<idx<<", "<<f<<std::endl;
+               double f = hFval[idx];
+               int iaj = hIAval[idimCube+idx];
+               d[idim][iaj] += f*f;
             }
          }
       }
 
-      endVegasFill = getrusage_sec();
+      endVegasFill = getrusage_usec();
       timeVegasFill += endVegasFill-startVegasFill;
 
       tsi *= dv2g;
@@ -335,6 +298,7 @@ void gVegas(double& avgi, double& sd, double& chi2a)
          std::cout<<std::endl;
          std::cout<<" << integration by vegas >>"<<std::endl;
          std::cout<<"     iteration no. "<<std::setw(4)<<it
+                  <<std::setw(10)<<std::setprecision(6)
                   <<"   integral=  "<<ti<<std::endl;
          std::cout<<"                          std dev  = "<<tsi<<std::endl;
          std::cout<<"     accumulated results: integral = "<<avgi<<std::endl;
@@ -350,33 +314,13 @@ void gVegas(double& avgi, double& sd, double& chi2a)
                std::cout<<"    x    delt i   convce";
                std::cout<<"    x    delt i   convce";
                std::cout<<"    x    delt i   convce"<<std::endl;
-               /*
-               for (int i=0;i<nd;i+=3) {
-                  std::cout<<std::setw(6)<<std::setprecision(2)<<std::setfill(' ')
-                           <<xi[j][i]<<" "<<di[j][i]<<" "<<d[j][i];
-                  std::cout<<std::setw(6)<<std::setprecision(2)
-                           <<xi[j][i+1]<<" "<<di[j][i+1]<<" "<<d[j][i+1];
-                  std::cout<<std::setw(6)<<std::setprecision(2)
-                           <<xi[j][i+2]<<" "<<di[j][i+2]<<" "<<d[j][i+2]
-                           <<std::endl;
-                           }
-               */
             }
          }
       }
 
       // refine grid
 
-      startVegasRefine = getrusage_sec();
-
-      /*
-      for (int ii=0;ii<ndim;ii++) {
-         for (int jj=0;jj<nd;jj++) {
-            std::cout<<"d["<<ii<<"]["<<jj<<"] = "<<std::scientific
-                     <<d[ii][jj]<<std::endl;
-         }
-      }
-      */
+      startVegasRefine = getrusage_usec();
       
       double r[nd_max];
       double dt[ndim_max];
@@ -432,19 +376,16 @@ void gVegas(double& avgi, double& sd, double& chi2a)
          } while (i<nd-2);
 
          for (int i=0;i<nd-1;i++) {
-            xi[j][i] = (float)xin[i];
+            xi[j][i] = (double)xin[i];
          }
-         xi[j][nd-1] = 1.f;
+         xi[j][nd-1] = 1.;
 
       }
       cudaMemcpyToSymbol(g_xi, xi, sizeof(xi));
-      cudaDeviceSynchronize(); // wait for synchronize
+      cudaThreadSynchronize(); // wait for synchronize
 
-      endVegasRefine = getrusage_sec();
+      endVegasRefine = getrusage_usec();
       timeVegasRefine += endVegasRefine-startVegasRefine;
-      
-//      std::cout<<"The end of main loop: it, sd/avgi = "<<it<<", "
-//               <<sd/fabs(avgi)<<std::endl;
       
    } while (it<itmx && acc*fabs(avgi)<sd);
 
@@ -453,8 +394,6 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    cudaFree(gFval);
 
    cudaFreeHost(hIAval);
-//   free(hIAval);
    cudaFree(gIAval);
 
-   //   std::cout<<"ng = "<<ng<<std::endl;
 }

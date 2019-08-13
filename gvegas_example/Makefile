@@ -34,28 +34,25 @@
 ################################################################################
 
 # Add source files here
-EXECUTABLE	:= gVegasSingle
+EXECUTABLE	:= gvegas_example
 
 # Cuda source files (compiled with cudacc)
 CUFILES		:= gVegasMain.cu
 
 # CUDA dependency files
-CU_DEPS      := 
-CCFILES	     := 
+CU_DEPS      := gVegasMain.cu gVegas.cu gVegasCallFunc.cu gVegasFunc.cu
+CCFILES	     := getrusage_sec.cpp
 
 COMMONDIR := ../
 
-NREG = 74
 fastmath = 1
 maxregisters = ${NREG}
-#CUDACCFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0 
+ptxas = 1
+NVCCFLAGS := -OPT:Olimit=0
 #SMVERSIONFLAGS := -arch sm_13
-#SMVERSIONFLAGS := --ptxas-options=-v --opencc-options -OPT:Olimit=0 --host-compilation c++  -D_DEBUG
 
-# Additional compiler flags and LIBs to include
-#USEGLLIB         := 1
-#USEGLUT          := 1
-#USERENDERCHECKGL := 1
+# The variable, SMS, is recommended by DMC to ensure architectures are correct.
+SMS ?= 35 60 70
 
 ################################################################################
 # Custom flags for cuda compiler
@@ -66,7 +63,5 @@ CUDACCFLAGS := --ptxas-options=-v # --gpu-architecture=compute_32 --gpu-code=sm_
 ################################################################################
 # Rules and targets
 
-$(EXECUTABLE) : gVegasMain.cu gVegas.cu gVegasCallFunc.cu gVegasFunc.cu
-	nvcc -o $@  gVegasMain.cu $(CUDACCFLAGS)
-
-
+$(EXECUTABLE) :  $(CUFILES) $(CU_DEPS) $(CCFILES)
+	nvcc -o $@  gVegasMain.cu getrusage_sec.cpp $(CUDACCFLAGS)

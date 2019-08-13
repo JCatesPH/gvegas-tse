@@ -1,13 +1,13 @@
 #include <cmath>
 
-#define Norum 0.0000000001f*2.32830643653869628906f
+#define Norum 0.0000000001*2.32830643653869628906
 
 #define nLoopRndm (32)
 
 __device__ __host__ __forceinline__
-void fxorshift128(unsigned int& seed,
+void fxorshift128(unsigned int seed,
                   int n,
-                  float* a)
+                  double* a)
 {
     unsigned int x,y,z,w,t;
 
