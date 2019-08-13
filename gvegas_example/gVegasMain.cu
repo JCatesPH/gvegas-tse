@@ -62,13 +62,13 @@ int main(int argc, char** argv)
    //  Initialization
    //------------------
 
-   int itmx0 = 40;
+   int itmx0 = 1000;
    int nBlockSize0 = 224;
    int GPUdevice = 0;
 
    float acc0 = 0.0001f;
 
-   char* nCallStr = "e07n1";
+   char* nCallStr = "e07n1"; // e > 7 gives bad malloc
    // cutGetCmdLineArgumentstr(argc, (const char**)argv, "ncall", &nCallStr);
    // cutGetCmdLineArgumenti(argc, (const char**)argv, "itmx", &itmx0);
    // cutGetCmdLineArgumentf(argc, (const char**)argv, "acc", &acc0);
