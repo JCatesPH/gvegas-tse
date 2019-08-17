@@ -14,17 +14,18 @@ double func(double* rx, double wgt)
    // double mu  = 0.0;
 
    for (int i=0;i<g_ndim;i++) {
-      value += rx[i]; // Simple sum (for F-D)
+      // value += rx[i]; // Simple sum (for F-D)
       // value *= rx[i]; // Simple product
       // value += rx[i] * rx[i]; // Sum of squares (for M-B or Singular)
       // value += (rx[i] - mu) * (rx[i] - mu);
+      value += cos(log(rx[i]) / rx[i]) / rx[i]
    }
    
    // Just return the sum the vector.
-   // result = value;
+   result = value;
 
    // sin of vector's sum
-   result = sin(value);
+   // result = sin(value);
 
    // Maxwell-Boltzmann Distribution
    // result = sqrt(2 * c * c * c / PI) * value * exp(-c / 2 * value);
