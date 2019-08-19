@@ -37,11 +37,11 @@
 EXECUTABLE	:= cudatest
 
 # Cuda source files (compiled with cudacc)
-CUFILES		:= cublas-ex1.cu
+CUFILES		:= MonteCarlo_kernel.cu
 
 # CUDA dependency files
-CU_DEPS      := 
-CCFILES	     := 
+CU_DEPS      := MonteCarlo_reduction.cuh multithreading.h realtype.h
+CCFILES	     := MonteCarlo_gold.cpp MonteCarloMultiGPU.cpp multithreading.cpp
 
 COMMONDIR := ../
 
@@ -65,4 +65,4 @@ CUDACCFLAGS := -lcublas #-lgomp
 # Rules and targets
 
 $(EXECUTABLE) :  $(CUFILES) $(CU_DEPS) $(CCFILES)
-	nvcc -o $@  cublas-ex1.cu $(CUDACCFLAGS)
+	nvcc -o $@  $(CUFILES) $(CCFILES) $(CUDACCFLAGS)
