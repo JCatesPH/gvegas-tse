@@ -43,7 +43,7 @@ CUFILES		:= MonteCarlo_kernel.cu
 CU_DEPS      := MonteCarlo_reduction.cuh multithreading.h realtype.h
 CCFILES	     := MonteCarlo_gold.cpp MonteCarloMultiGPU.cpp multithreading.cpp
 
-COMMONDIR := ../
+COMMONDIR := ../common
 
 fastmath = 1
 maxregisters = ${NREG}
@@ -59,7 +59,7 @@ SMS ?= 35 60 70
 
 # For Virutal Architecture with Kepler Support and GPU Features providing Basic and Kepler Support
 # CUDACCFLAGS := --ptxas-options=-v --gpu-architecture=compute_32 --gpu-code=sm_32
-CUDACCFLAGS := -lcublas #-lgomp
+CUDACCFLAGS := -lcublas --include-path $(COMMONDIR) #-lgomp
 
 ################################################################################
 # Rules and targets
