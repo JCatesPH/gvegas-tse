@@ -26,7 +26,7 @@
 // includes, project
 #include "helper_functions.h" // Helper functions (utilities, parsing, timing)
 #include "helper_cuda.h"     // helper functions (cuda error checking and initialization)
-#include <multithreading.h>
+#include "multithreading.h"
 
 #include "MonteCarlo_common.h"
 
