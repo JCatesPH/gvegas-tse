@@ -14,7 +14,7 @@
 #define COMMON_HELPER_IMAGE_H_
 
 #include <assert.h>
-#include <exception.h>
+#include "exception.h"
 #include <math.h>
 #include <stdint.h>
 
