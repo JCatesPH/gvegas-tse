@@ -65,4 +65,4 @@ CUDACCFLAGS := -lgomp
 # Rules and targets
 
 $(EXECUTABLE) :  $(CUFILES) $(CU_DEPS) $(CCFILES)
-	nvcc -o $@  gVegasMain.cu getrusage_sec.cpp $(CUDACCFLAGS)
+	nvcc -o $@  gVegasMain.cu $(CUDACCFLAGS)
