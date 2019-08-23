@@ -64,5 +64,5 @@ CUDACCFLAGS := -lgomp
 ################################################################################
 # Rules and targets
 
-$(EXECUTABLE) :  $(CUFILES) $(CU_DEPS) $(CCFILES)
+$(EXECUTABLE) :  $(CUFILES) $(CU_DEPS) # $(CCFILES)
 	nvcc -o $@  gVegasMain.cu $(CUDACCFLAGS)
