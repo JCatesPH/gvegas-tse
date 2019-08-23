@@ -7,9 +7,9 @@
 /*-------- constants for chi ---------*/
 #define mu      0.1f
 #define hOmg    0.3f
-#define a       4.f
+#define a       3.6f
 #define A       4.f
-#define rati    0.3
+#define rati    0.1
 #define eE0     rati * (hOmg * hOmg) / (2 * sqrt(A * mu))
 #define Gamm    0.003
 #define KT      1e-6
