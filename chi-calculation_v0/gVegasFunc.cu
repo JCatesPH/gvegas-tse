@@ -47,7 +47,7 @@ float chi(float* rx, float wgt)
    cuFloatComplex* sing;
    checkCudaErrors(cudaMalloc((void**)&sing, N*sizeof(cuFloatComplex)));
 
-   n = 0
+   int n = 0;
    for (int j=-(N - 1)/2; i < ((N-1)/2+1)); i++) {
       sing[0 + n * 6] = make_cuFloatComplex(2 * atan2f(Gamm, ek - hOmg / 2 + hOmg * i), 0);
       sing[1 + n * 6] = make_cuFloatComplex(2 * atan2f(Gamm, ekq - hOmg / 2 + hOmg * i), 0);

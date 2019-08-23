@@ -122,7 +122,7 @@ void myVegasCallFilla(int mds)
 
 
 /* Different calls for different functions */	
-	f = wgt * sum(x, g_ndim);	
+	f = wgt * chi(x, g_ndim);	
 //	f = wgt * sqsum(x, g_ndim);
 //	f = wgt * sumsqroot(x, g_ndim);
 //	f = wgt * prodones(x, g_ndim);
