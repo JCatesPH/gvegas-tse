@@ -48,7 +48,7 @@ float chi(float* rx, float wgt)
    checkCudaErrors(cudaMalloc((void**)&sing, N*sizeof(cuFloatComplex)));
 
    int n = 0;
-   for (int j=-(N - 1)/2; i < ((N-1)/2+1)); i++) {
+   for (int i=-(N - 1)/2; i < ((N-1)/2+1)); i++) {
       sing[0 + n * 6] = make_cuFloatComplex(2 * atan2f(Gamm, ek - hOmg / 2 + hOmg * i), 0);
       sing[1 + n * 6] = make_cuFloatComplex(2 * atan2f(Gamm, ekq - hOmg / 2 + hOmg * i), 0);
       sing[2 + n * 6] = make_cuFloatComplex(2 * atan2f(Gamm, ek + hOmg / 2 + hOmg * i), 0);
@@ -70,7 +70,7 @@ float chi(float* rx, float wgt)
    cuFloatComplex* dbl;
    checkCudaErrors(cudaMalloc((void**)&dbl, 2*(2*N-1)*sizeof(cuFloatComplex)));
 
-   n = 0
+   n = 0;
    for (int i=-(N - 1); i < N; i++){
        dbl[0 + n * 5] = make_cuFloatComplex(2 * atan2f(Gamm, (ek - mu + hOmg * i)), 0);
        dbl[1 + n * 5] = make_cuFloatComplex(2 * atan2f(Gamm, (ekq - mu + hOmg * i)), 0);
@@ -93,7 +93,25 @@ float chi(float* rx, float wgt)
        n = n + 1
     }
 
+    cuFloatComplex* I2;
+    checkCudaErrors(cudaMalloc((void**)&I2, sizeof(cuFloatComplex)));
     I2 = make_cuFloatComplex(0, -2);
+
+    cuFloatComplex* omint1p;
+    checkCudaErrors(cudaMalloc((void**)&omint1p, sizeof(cuFloatComplex)));
+    cuFloatComplex* omint1m;
+    checkCudaErrors(cudaMalloc((void**)&omint1m, sizeof(cuFloatComplex)));
+    cuFloatComplex* bess1;
+    checkCudaErrors(cudaMalloc((void**)&bess1, sizeof(cuFloatComplex)));
+    cuFloatComplex* omint2p;
+    checkCudaErrors(cudaMalloc((void**)&omint2p, sizeof(cuFloatComplex)));
+    cuFloatComplex* omint2m;
+    checkCudaErrors(cudaMalloc((void**)&omint2m, sizeof(cuFloatComplex)));
+    cuFloatComplex* bess2;
+    checkCudaErrors(cudaMalloc((void**)&bess2, sizeof(cuFloatComplex)));
+    cuFloatComplex* dds;
+    checkCudaErrors(cudaMalloc((void**)&dds, sizeof(cuFloatComplex)));
+    
 
    for (int n=0; n<N; n++){
        for (int alpha=0; alpha<N; alpha++){
@@ -150,7 +168,7 @@ float chi(float* rx, float wgt)
                                         )
                                     )
                                 )
-                            )
+                            );
 
                             omint1m = cuCmulf(
                                 sing[9+s*10], 
@@ -191,7 +209,7 @@ float chi(float* rx, float wgt)
                                         )
                                     )
                                 )
-                            )
+                            );
 
                             bess1 = cuCmulf(
                                 dbl[5+(gamma-n+N-1)*9], 
@@ -208,94 +226,89 @@ float chi(float* rx, float wgt)
                                         )
                                     )
                                 )
-                            )
-                            grgl = cuCmulf(bess1, cuCsubf(omint1p, omint1m))
+                            );
 
-                            pp1p = cuCmulf(
-                                dbl[6+(alpha-beta+N-1)*9], 
-                                cuCsubf(
-                                    cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
-                                    cuCaddf(sing[5+gamma*10], dbl[3+(s+gamma)*9])
-                                )
-                            )
-
-                            pp2p = cuCmulf(
-                                dbl[7+(alpha-beta+N-1)*9],
-                                cuCaddf(
-                                    cuCsubf(dbl[1+(s+beta)*9], sing[1+beta*10]), 
-                                    cuCsubf(sing[5+beta*10], dbl[3+(s+beta)*9])
-                                )
-                            )
-
-                            pp3p = cuCmulf(
-                                dbl[8+(beta-gamma+N-1)*9],
-                                cuCsubf(
-                                    cuCsubf(sing[alpha*10], dbl[0 + (s+alpha) * 9]), 
-                                    cuCaddf(sing[4+alpha*10], dbl[2 + (s+alpha) * 9])
-                                )
-                            )
-
-                            pp1m = cuCmulf(
-                                dbl[6+(alpha-beta+N-1)*9],
-                                cuCsubf(
-                                    cuCsubf(dbl[1+(s+gamma)*9], sing[3+gamma*10]),
-                                    cuCaddf(sing[7+gamma*10], dbl[3+(s+gamma)*9])
-                                )
-                            )
-
-                            pp2m = cuCmulf(
-                                dbl[7+(alpha-gamma+N-1)*9], 
-                                cuCaddf(
-                                    cuCsubf(dbl[1+(s+beta)*9], sing[3+beta*10]), 
-                                    cuCsubf(sing[7+beta*10], dbl[3+(s+beta)*9])
-                                )
-                            )
-
-                            pp3m = cuCmulf(
-                                dbl[8+(beta-gamma+N-1)*9],
-                                cuCsubf(
-                                    cuCsubf(sing[2+alpha*10], dbl[0 + (s+alpha) * 9]),
-                                    cuCaddf(sing[6+alpha*10], dbl[2 + (s+alpha) * 9])
-                                )
-                            )
-
-                            d2 = cuCmulf(
-                                I2, 
-                                cuCmulf(
-                                    dbl[6+(alpha-beta+N-1)*9],
-                                    cuCmulf(
-                                        dbl[7+(alpha-gamma+N-1)*9],
-                                        dbl[8+(beta-gamma+N-1)*9]
-                                    )
-                                )
-                            )
                             omint2p = cuCmulf(
                                 sing[8+s*10],
                                 cuCdivf(
                                     cuCaddf(
-                                        pp1p, 
+                                        cuCmulf(
+                                            dbl[6+(alpha-beta+N-1)*9], 
+                                            cuCsubf(
+                                                cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
+                                                cuCaddf(sing[5+gamma*10], dbl[3+(s+gamma)*9])
+                                            )
+                                        ), 
                                         cuCaddf(
-                                            pp2p, 
-                                            pp3p
+                                            cuCmulf(
+                                                dbl[7+(alpha-beta+N-1)*9],
+                                                cuCaddf(
+                                                    cuCsubf(dbl[1+(s+beta)*9], sing[1+beta*10]), 
+                                                    cuCsubf(sing[5+beta*10], dbl[3+(s+beta)*9])
+                                                )
+                                            ), 
+                                            cuCmulf(
+                                                dbl[8+(beta-gamma+N-1)*9],
+                                                cuCsubf(
+                                                    cuCsubf(sing[alpha*10], dbl[0 + (s+alpha) * 9]), 
+                                                    cuCaddf(sing[4+alpha*10], dbl[2 + (s+alpha) * 9])
+                                                )
+                                            )
                                         ),
                                     ) 
-                                    d2
+                                    cuCmulf(
+                                        I2, 
+                                        cuCmulf(
+                                            dbl[6+(alpha-beta+N-1)*9],
+                                            cuCmulf(
+                                                dbl[7+(alpha-gamma+N-1)*9],
+                                                dbl[8+(beta-gamma+N-1)*9]
+                                            )
+                                        )
+                                    )
                                 )
-                            )
+                            );
 
                             omint2m = cuCmulf(
                                 sing[9+s*10], 
                                 cuCdivf(
                                     cuCaddf(
-                                        pp1m, 
+                                        cuCmulf(
+                                            dbl[6+(alpha-beta+N-1)*9],
+                                            cuCsubf(
+                                                cuCsubf(dbl[1+(s+gamma)*9], sing[3+gamma*10]),
+                                                cuCaddf(sing[7+gamma*10], dbl[3+(s+gamma)*9])
+                                            )
+                                        ), 
                                         cuCaddf(
-                                            pp2m, 
-                                            pp3m
+                                            cuCmulf(
+                                                dbl[7+(alpha-gamma+N-1)*9], 
+                                                cuCaddf(
+                                                    cuCsubf(dbl[1+(s+beta)*9], sing[3+beta*10]), 
+                                                    cuCsubf(sing[7+beta*10], dbl[3+(s+beta)*9])
+                                                )
+                                            ), 
+                                            cuCmulf(
+                                                dbl[8+(beta-gamma+N-1)*9],
+                                                cuCsubf(
+                                                    cuCsubf(sing[2+alpha*10], dbl[0 + (s+alpha) * 9]),
+                                                    cuCaddf(sing[6+alpha*10], dbl[2 + (s+alpha) * 9])
+                                                )
+                                            )
                                         ),
                                     ) 
-                                    d2
+                                    cuCmulf(
+                                        I2, 
+                                        cuCmulf(
+                                            dbl[6+(alpha-beta+N-1)*9],
+                                            cuCmulf(
+                                                dbl[7+(alpha-gamma+N-1)*9],
+                                                dbl[8+(beta-gamma+N-1)*9]
+                                            )
+                                        )
+                                    )
                                 )
-                            )
+                            );
 
                             bess2 = cuCmulf(
                                 dbl[5+(gamma-n+N-1)*9],
@@ -312,19 +325,36 @@ float chi(float* rx, float wgt)
                                         )
                                     )
                                 )
-                            )
-                            glga = cuCmulf(
-                                bess2, 
-                                cuCsubf(omint2p, omint2m)
-                            )
+                            );
 
                             dds = cuCaddf(
                                 dds, 
                                 // Gamm * (grgl + glga)
                                 cuCaddf(
-                                    make_cuFloatComplex(Gamm*cuCrealf(grgl), Gamm*cuCimagf(grgl)),
-                                    make_cuFloatComplex(Gamm*cuCrealf(glga), Gamm*cuCimagf(glga))
+                                    make_cuFloatComplex(
+                                        Gamm*cuCrealf(cuCmulf(
+                                            bess1, 
+                                            cuCsubf(omint1p, omint1m)
+                                            )
+                                        ), 
+                                        Gamm*cuCimagf(cuCmulf(
+                                            bess1, 
+                                            cuCsubf(omint1p, omint1m))
+                                            )
+                                        ),
+                                    make_cuFloatComplex(
+                                        Gamm*cuCrealf(cuCmulf(
+                                            bess2, 
+                                            cuCsubf(omint2p, omint2m)
+                                            )
+                                        ), 
+                                        Gamm*cuCimagf(cuCmulf(
+                                            bess2, 
+                                            cuCsubf(omint2p, omint2m))
+                                        )
+                                    )
                                 )
+                            );
                         }
                     }
                 }
