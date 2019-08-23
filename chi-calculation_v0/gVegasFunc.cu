@@ -93,6 +93,7 @@ float chi(float* rx, float wgt)
        n = n + 1
     }
 
+    I2 = make_cuFloatComplex(0, -2);
 
    for (int n=0; n<N; n++){
        for (int alpha=0; alpha<N; alpha++){
@@ -104,51 +105,226 @@ float chi(float* rx, float wgt)
                             // p2p = dbl[7+(alpha-gamma+N-1)*9] * (sing[0+beta*10] - dbl[0+(s+beta)*9] + sing[4+beta*10] - dbl[2+(s+beta)*9])
                             // p3p = dbl[8+(alpha-beta+N-1)*9] * (-sing[1+gamma*10] + dbl[1+(s+gamma)*9] - sing[5+gamma*10] + dbl[3+(s+gamma)*9])
 
-                            p1m = dbl[6 + (beta - gamma + N - 1) * 9] * (sing[2+alpha*10] - dbl[(s+alpha)*9] - sing[6+alpha*10] + dbl[2+(s+alpha)*9])
+                            // p1m = dbl[6 + (beta - gamma + N - 1) * 9] * (sing[2+alpha*10] - dbl[(s+alpha)*9] - sing[6+alpha*10] + dbl[2+(s+alpha)*9])
+                            // p2m = dbl[7+(alpha-gamma+N-1)*9] * ( sing[2+beta*10] - dbl[0+(s+beta)*9] + sing[6+beta*10] - dbl[2+(s+beta)*9])
+                            // p3m = dbl[8+(alpha-beta+N-1)*9] * (-sing[3+gamma*10] + dbl[1+(s+gamma)*9] - sing[7+gamma*10] + dbl[3+(s+gamma)*9])
 
-                            p2m = dbl[7+(alpha-gamma+N-1)*9] * ( sing[2+beta*10] - dbl[0+(s+beta)*9] + sing[6+beta*10] - dbl[2+(s+beta)*9])
+                            // d1 = cuCmulf(2I, cuCmulf(dbl[6 + (beta - gamma + N - 1) * 9], cuCmulf(dbl[7+(alpha-gamma+N-1)*9], dbl[8+(alpha-beta+N-1)*9])))
 
-                            p3m = dbl[8+(alpha-beta+N-1)*9] * (-sing[3+gamma*10] + dbl[1+(s+gamma)*9] - sing[7+gamma*10] + dbl[3+(s+gamma)*9])
-
-                            d1 =  make_cuFloatComplex(0,-2 * dbl[6 + (beta - gamma + N - 1) * 9] * dbl[7+(alpha-gamma+N-1)*9] * dbl[8+(alpha-beta+N-1)*9])
-
-                            omint1p = sing[8+s*10] * (
-                                (
-                                dbl[6+(beta - gamma + N - 1)*9] * (sing[0+alpha*10] - dbl[0+(s+alpha)*9] - sing[4+alpha*10] + dbl[2+(s+alpha)*9]) + 
-                                dbl[7+(alpha-gamma+N-1)*9] * (sing[0+beta*10] - dbl[0+(s+beta)*9] + sing[4+beta*10] - dbl[2+(s+beta)*9]) + 
-                                dbl[8+(alpha-beta+N-1)*9] * (-sing[1+gamma*10] + dbl[1+(s+gamma)*9] - sing[5+gamma*10] + dbl[3+(s+gamma)*9])
-                            ) / d1
+                            omint1p = cuCmulf(
+                                sing[8+s*10], 
+                                cuCdivf(
+                                    cuCaddf(
+                                        cuCaddf(
+                                            cuCmulf(
+                                                dbl[6+(beta - gamma + N - 1)*9], 
+                                                cuCsubf(
+                                                    cuCsubf(sing[alpha*10], dbl[(s+alpha)*9]), 
+                                                    cuCaddf(sing[4+alpha*10], dbl[2+(s+alpha)*9])
+                                                )
+                                            ), 
+                                            cuCmulf(
+                                                dbl[7+(alpha-gamma+N-1)*9], 
+                                                cuCaddf(
+                                                    cuCsubf(sing[beta*10], dbl[(s+beta)*9]), 
+                                                    cuCsubf(sing[4+beta*10], dbl[2+(s+beta)*9])
+                                                )
+                                            )
+                                        ), 
+                                        cuCmulf(
+                                            dbl[8+(alpha-beta+N-1)*9], 
+                                            cuCsubf(
+                                                cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
+                                                cuCaddf(sing[5+gamma*10], dbl[3+(s+gamma)*9])
+                                            )
+                                        ),
+                                    ),  
+                                    cuCmulf(
+                                        I2, 
+                                        cuCmulf(
+                                            dbl[6 + (beta - gamma + N - 1) * 9], 
+                                            cuCmulf(
+                                                dbl[7+(alpha-gamma+N-1)*9], 
+                                                dbl[8+(alpha-beta+N-1)*9]
+                                            )
+                                        )
+                                    )
+                                )
                             )
 
-                            omint1m = sing[9+s*10] * ((p1m + p2m + p3m) / d1)
+                            omint1m = cuCmulf(
+                                sing[9+s*10], 
+                                cuCdivf(
+                                    cuCaddf(
+                                        cuCaddf(
+                                            cuCmulf(
+                                                dbl[6+(beta-gamma+N-1) * 9], 
+                                                cuCsubf(
+                                                    cuCsubf(sing[2+alpha*10], dbl[(s+alpha)*9]), 
+                                                    cuCaddf(sing[6+alpha*10], dbl[2+(s+alpha)*9])
+                                                )
+                                            ),  
+                                            cuCmulf(
+                                                dbl[7+(alpha-gamma+N-1)*9], 
+                                                cuCsubf(
+                                                    cuCsubf(sing[2+beta*10], dbl[(s+beta)*9]), 
+                                                    cuCaddf(sing[6+beta*10], dbl[2+(s+beta)*9])
+                                                )
+                                            )
+                                        ), 
+                                        cuCmulf(
+                                            dbl[8+(alpha-beta+N-1)*9], 
+                                            cuCsubf(
+                                                cuCsubf(dbl[1+(s+gamma)*9], sing[3+gamma*10]), 
+                                                cuCaddf(sing[7+gamma*10] + dbl[3+(s+gamma)*9])
+                                            )
+                                        )
+                                    ),  
+                                    cuCmulf(
+                                        I2, 
+                                        cuCmulf(
+                                            dbl[6 + (beta - gamma + N - 1) * 9], 
+                                            cuCmulf(
+                                                dbl[7+(alpha-gamma+N-1)*9], 
+                                                dbl[8+(alpha-beta+N-1)*9]
+                                            )
+                                        )
+                                    )
+                                )
+                            )
 
-                            bess1 = dbl[5+(gamma-n+N-1)*9] * dbl[5+(gamma-l+N-1)*9] * dbl[4+(beta-l+N-1)*9] * dbl[4+(beta-s+N-1)*9] * dbl[4+(alpha-s+N-1)*9] * dbl[4+(alpha-n+N-1)*9]
+                            bess1 = cuCmulf(
+                                dbl[5+(gamma-n+N-1)*9], 
+                                cuCmulf(
+                                    dbl[5+(gamma-l+N-1)*9], 
+                                    cuCmulf(
+                                        dbl[4+(beta-l+N-1)*9], 
+                                        cuCmulf(
+                                            dbl[4+(beta-s+N-1)*9], 
+                                            cuCmulf(
+                                                dbl[4+(alpha-s+N-1)*9], 
+                                                dbl[4+(alpha-n+N-1)*9]
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                            grgl = cuCmulf(bess1, cuCsubf(omint1p, omint1m))
 
-                            grgl = bess1 * (omint1p - omint1m)
+                            pp1p = cuCmulf(
+                                dbl[6+(alpha-beta+N-1)*9], 
+                                cuCsubf(
+                                    cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
+                                    cuCaddf(sing[5+gamma*10], dbl[3+(s+gamma)*9])
+                                )
+                            )
 
-                            pp1p = dbl[6+(alpha-beta+N-1)*9] * (-sing[1+gamma*10] + dbl[1+(s+gamma)*9] - sing[5+gamma*10] + dbl[3+(s+gamma)*9])
+                            pp2p = cuCmulf(
+                                dbl[7+(alpha-beta+N-1)*9],
+                                cuCaddf(
+                                    cuCsubf(dbl[1+(s+beta)*9], sing[1+beta*10]), 
+                                    cuCsubf(sing[5+beta*10], dbl[3+(s+beta)*9])
+                                )
+                            )
 
-                            pp2p = dbl[7+(alpha-gamma+N-1)*9] * (-sing[1+beta*10] + dbl[1+(s+beta)*9] + sing[5+beta*10] - dbl[3+(s+beta)*9])
+                            pp3p = cuCmulf(
+                                dbl[8+(beta-gamma+N-1)*9],
+                                cuCsubf(
+                                    cuCsubf(sing[alpha*10], dbl[0 + (s+alpha) * 9]), 
+                                    cuCaddf(sing[4+alpha*10], dbl[2 + (s+alpha) * 9])
+                                )
+                            )
 
-                            pp3p = dbl[8 + (beta - gamma + N - 1) * 9] * (sing[0+alpha*10] - dbl[0 + (s+alpha) * 9] - sing[4+alpha*10] + dbl[2 + (s+alpha) * 9])
+                            pp1m = cuCmulf(
+                                dbl[6+(alpha-beta+N-1)*9],
+                                cuCsubf(
+                                    cuCsubf(dbl[1+(s+gamma)*9], sing[3+gamma*10]),
+                                    cuCaddf(sing[7+gamma*10], dbl[3+(s+gamma)*9])
+                                )
+                            )
 
-                            pp1m = dbl[6+(alpha-beta+N-1)*9] * (-sing[3+gamma*10] + dbl[1+(s+gamma)*9] - sing[7+gamma*10] + dbl[3+(s+gamma)*9])
+                            pp2m = cuCmulf(
+                                dbl[7+(alpha-gamma+N-1)*9], 
+                                cuCaddf(
+                                    cuCsubf(dbl[1+(s+beta)*9], sing[3+beta*10]), 
+                                    cuCsubf(sing[7+beta*10], dbl[3+(s+beta)*9])
+                                )
+                            )
 
-                            pp2m = dbl[7+(alpha-gamma+N-1)*9] * (-sing[3+beta*10] + dbl[1+(s+beta)*9] + sing[7+beta*10] - dbl[3+(s+beta)*9])
+                            pp3m = cuCmulf(
+                                dbl[8+(beta-gamma+N-1)*9],
+                                cuCsubf(
+                                    cuCsubf(sing[2+alpha*10], dbl[0 + (s+alpha) * 9]),
+                                    cuCaddf(sing[6+alpha*10], dbl[2 + (s+alpha) * 9])
+                                )
+                            )
 
-                            pp3m = dbl[8 + (beta - gamma + N - 1) * 9] * (sing[2+alpha*10] - dbl[0 + (s+alpha) * 9] - sing[6+alpha*10] + dbl[2 + (s+alpha) * 9])
+                            d2 = cuCmulf(
+                                I2, 
+                                cuCmulf(
+                                    dbl[6+(alpha-beta+N-1)*9],
+                                    cuCmulf(
+                                        dbl[7+(alpha-gamma+N-1)*9],
+                                        dbl[8+(beta-gamma+N-1)*9]
+                                    )
+                                )
+                            )
+                            omint2p = cuCmulf(
+                                sing[8+s*10],
+                                cuCdivf(
+                                    cuCaddf(
+                                        pp1p, 
+                                        cuCaddf(
+                                            pp2p, 
+                                            pp3p
+                                        ),
+                                    ) 
+                                    d2
+                                )
+                            )
 
-                            d2 = make_cuFloatComplex(0,-2 * dbl[6+(alpha-beta+N-1)*9] * dbl[7+(alpha-gamma+N-1)*9] * dbl[8 + (beta - gamma + N - 1) * 9])
+                            omint2m = cuCmulf(
+                                sing[9+s*10], 
+                                cuCdivf(
+                                    cuCaddf(
+                                        pp1m, 
+                                        cuCaddf(
+                                            pp2m, 
+                                            pp3m
+                                        ),
+                                    ) 
+                                    d2
+                                )
+                            )
 
-                            omint2p = sing[8+s*10] * ((pp1p + pp2p + pp3p) / d2)
+                            bess2 = cuCmulf(
+                                dbl[5+(gamma-n+N-1)*9],
+                                cuCmulf(
+                                    dbl[5+(gamma-s+N-1)*9], 
+                                    cuCmulf(
+                                        dbl[5+(beta-s+N-1)*9],
+                                        cuCmulf(
+                                            dbl[5+(beta-l+N-1)*9],
+                                            cuCmulf(
+                                                dbl[4+(alpha-l+N-1)*9],
+                                                dbl[4+(alpha-n+N-1)*9]
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                            glga = cuCmulf(
+                                bess2, 
+                                cuCsubf(omint2p, omint2m)
+                            )
 
-                            omint2m = sing[9+s*10] * ((pp1m + pp2m + pp3m) / d2)
-
-                            bess2 = dbl[5+(gamma-n+N-1)*9] * dbl[5+(gamma-s+N-1)*9] * dbl[5+(beta-s+N-1)*9] * dbl[5+(beta-l+N-1)*9] * dbl[4+(alpha-l+N-1)*9] * dbl[4+(alpha-n+N-1)*9]
-
-                            glga = bess2 * (omint2p - omint2m)
-
-                            dds = dds + Gamm * (grgl + glga)
+                            dds = cuCaddf(
+                                dds, 
+                                // Gamm * (grgl + glga)
+                                cuCaddf(
+                                    make_cuFloatComplex(Gamm*cuCrealf(grgl), Gamm*cuCimagf(grgl)),
+                                    make_cuFloatComplex(Gamm*cuCrealf(glga), Gamm*cuCimagf(glga))
+                                )
                         }
                     }
                 }
