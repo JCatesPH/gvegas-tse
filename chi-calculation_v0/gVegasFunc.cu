@@ -22,7 +22,7 @@
 #define CB(x)  (x * x * x) // Cubes the argument
 
 __device__
-float heaviside(float *x, float *z)
+float heaviside(float x, float z)
 {
     if (x < z)
     {
