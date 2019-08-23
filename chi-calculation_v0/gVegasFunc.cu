@@ -22,6 +22,20 @@
 #define CB(x)  (x * x * x) // Cubes the argument
 
 __device__
+float heaviside(float *x, float *z)
+{
+    if (x < z)
+    {
+        return 0.f;
+    }
+    else
+    {
+        return 1.f;
+    }
+    
+}
+
+__device__
 float chi(float* rx, float wgt)
 {
    float dds = 0.f;
@@ -54,8 +68,8 @@ float chi(float* rx, float wgt)
     sing[2 + n * 6] = make_cuFloatComplex(2 * atan2f(Gamm, ek + hOmg / 2 + hOmg * i), 0);
     sing[3 + n * 6] = make_cuFloatComplex(2 * atan2f(Gamm, ekq + hOmg / 2 + hOmg * i), 0);
 
-    sing[8 + n * 6] = make_cuFloatComplex(step(mu - hOmg / 2 - hOmg * i, 0.f), 0); 
-    sing[9 + n * 6] = make_cuFloatComplex(step(mu + hOmg / 2 - hOmg * i, 0.f), 0); 
+    sing[8 + n * 6] = make_cuFloatComplex(heaviside(mu - hOmg / 2 - hOmg * i, 0.f), 0); 
+    sing[9 + n * 6] = make_cuFloatComplex(heaviside(mu + hOmg / 2 - hOmg * i, 0.f), 0); 
 
     //------//
 
