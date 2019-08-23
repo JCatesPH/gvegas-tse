@@ -4,7 +4,6 @@
 #include "xorshift.cu"
 
 #include "gVegasFunc.cu"
-#include "testProblemToolbox.cu"
 
 #include "gVegasCallFunc.cu"
 #include "myVegasCallFilla.cu"
