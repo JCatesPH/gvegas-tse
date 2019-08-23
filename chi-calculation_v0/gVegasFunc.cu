@@ -44,110 +44,116 @@ float chi(float* rx, float wgt)
    xkq = 2 * A * eE0 * hypotf(rx[0] + rx[2], rx[1]) / SQ(hOmg);
 
    // singmatrix = numba.cuda.shared.array((10,N),dtype=numba.types.complex128)
-   int sizesing = 10 * N * sizeof(float);
-   float* singmatrix;
-   checkCudaErrors(cudaMalloc((void**)&singmatrix, sizesing));
+   int sizesing = N * sizeof(float);
+   float* singr, singi;
+   checkCudaErrors(cudaMalloc((void**)&singr, 6 * sizesing));
+   checkCudaErrors(cudaMalloc((void**)&singi, 4 * sizesing));
 
    n = 0
    for (int j=-(N - 1)/2; i < ((N-1)/2+1)); i++) {
-      singmatrix[0 + n * 10] = 2 * atan2f(Gamm, ek - hOmg / 2 + hOmg * i);
-      singmatrix[1 + n * 10] = 2 * atan2f(Gamm, ekq - hOmg / 2 + hOmg * i);
-      singmatrix[2 + n * 10] = 2 * atan2f(Gamm, ek + hOmg / 2 + hOmg * i);
-      singmatrix[3 + n * 10] = 2 * atan2f(Gamm, ekq + hOmg / 2 + hOmg * i);
+      singr[0 + n * 6] = 2 * atan2f(Gamm, ek - hOmg / 2 + hOmg * i);
+      singr[1 + n * 6] = 2 * atan2f(Gamm, ekq - hOmg / 2 + hOmg * i);
+      singr[2 + n * 6] = 2 * atan2f(Gamm, ek + hOmg / 2 + hOmg * i);
+      singr[3 + n * 6] = 2 * atan2f(Gamm, ekq + hOmg / 2 + hOmg * i);
 
-//========================================================================================================//
-// HERE DOWN NEEDS MODIFICATION
-      singmatrix[4 + n * 10] = complex(0, 1) * logf(Gammsq + SQ(ek - hOmg / 2 + hOmg * i));
-      singmatrix[5 + n * 10] = complex(0, 1) * logf(Gammsq + SQ(ekq - hOmg / 2 + hOmg * i));
-      singmatrix[6 + n * 10] = complex(0, 1) * logf(Gammsq + SQ(ek + hOmg / 2 + hOmg * i));
-      singmatrix[7 + n * 10] = complex(0, 1) * logf(Gammsq + SQ(ekq + hOmg / 2 + hOmg * i));
+      singr[4 + n * 6] = step(mu - hOmg / 2 - hOmg * i, 0.f); // 8 -> 4
+      singr[5 + n * 6] = step(mu + hOmg / 2 - hOmg * i, 0.f); // 9 -> 5
 
-      singmatrix[8 + n * 10] = cudahelpers.my_heaviside(mu - hOmg / 2 - hOmg * i);
-      singmatrix[9 + n * 10] = cudahelpers.my_heaviside(mu + hOmg / 2 - hOmg * i);
+      //------//
+
+      singi[0 + n * 10] = logf(Gammsq + SQ(ek - hOmg / 2 + hOmg * i));  // 4 -> 0
+      singi[1 + n * 10] = logf(Gammsq + SQ(ekq - hOmg / 2 + hOmg * i)); // 5 -> 1
+      singi[2 + n * 10] = logf(Gammsq + SQ(ek + hOmg / 2 + hOmg * i));  // 6 -> 2
+      singi[3 + n * 10] = logf(Gammsq + SQ(ekq + hOmg / 2 + hOmg * i)); // 7 -> 3
+
       n = n + 1
    }
 
-   size_dbl = 5
-   dblmatrix = numba.cuda.shared.array((9,size_dbl),dtype=numba.types.complex128)
+   int sizedbl = (2*N-1) * sizeof(float);
+   float* dblr, dbli;
+   checkCudaErrors(cudaMalloc((void**)&dblr, 5 * sizedbl));
+   checkCudaErrors(cudaMalloc((void**)&dbli, 2 * sizedbl));
+
+   cuFloatComplex* dblz;
+   checkCudaErrors(cudaMalloc((void**)&dblz, 2*(2*N-1)*sizeof(cuFloatComplex)));
 
    n = 0
-   for i in range(-(N - 1), N, 1):
-       xi = hOmg * i
-       zeta = ek - mu + xi
-       eta = ekq - mu + xi
+   for (int i=-(N - 1); i < N; i++){
+       dblr[0 + n * 5] = 2 * atan2f(Gamm, (ek - mu + hOmg * i));
+       dblr[1 + n * 5] = 2 * atan2f(Gamm, (ekq - mu + hOmg * i));
 
-       zetasq = zeta ** 2
-       etasq = eta ** 2
+       dblr[2 + n * 5] = jnf(i, xk); // Bessel function of order i
+       dblr[3 + n * 5] = jnf(i, xkq);
 
-       dblmatrix[0,n] = 2 * atan2f(Gamm, zeta)
-       dblmatrix[1,n] = 2 * atan2f(Gamm, eta)
+       dblr[4 + n * 5] = ek - ekq + hOmg * i;
 
-       logged1 = logf(Gammsq + zetasq)
-       logged2 = logf(Gammsq + etasq)
+       //------//
 
-       dblmatrix[2,n] = complex(0, logged1)
-       dblmatrix[3,n] = complex(0, logged2)
+       dbli[0 + n * 2] = logf(Gammsq + SQ(ek - mu + hOmg * i));
+       dbli[1 + n * 2] = logf(Gammsq + SQ(ekq - mu + hOmg * i));
 
-       dblmatrix[4,n] = cudahelpers.besselj(i, xk)
-       dblmatrix[5,n] = cudahelpers.besselj(i, xkq)
+       //------//
 
-       fac1i = ek - ekq + xi
-       fac2i = complex(fac1i, 2 * Gamm)
-       dblmatrix[6,n] = fac1i
-       dblmatrix[7,n] = fac2i
-       dblmatrix[8,n] = fac2i - ek + ekq
+       dblz[0 + n * 2] = make_cuFloatComplex(ek - ekq + hOmg * i, 2 * Gamm);
+       dblz[1 + n * 2] = make_cuFloatComplex(hOmg * i, 2 * Gamm);
        n = n + 1
+    }
 
-   #numba.cuda.syncthreads()
 
-   for n in range(0, N):
-       for alpha in range(0, N):
-           for beta in range(0, N):
-               for gamma in range(0, N):
-                   for s in range(0, N):
-                       for l in range(0, N):
-                           p1p = dblmatrix[6,beta - gamma + N - 1] * (singmatrix[0,alpha] - dblmatrix[0,s + alpha] - singmatrix[4,alpha] + dblmatrix[2,s + alpha])
-                           p2p = dblmatrix[7,alpha - gamma + N - 1] * (singmatrix[0,beta] - dblmatrix[0,s + beta] + singmatrix[4,beta] - dblmatrix[2,s + beta])
-                           p3p = dblmatrix[8,alpha - beta + N - 1] * (-singmatrix[1,gamma] + dblmatrix[1,s + gamma] - singmatrix[5,gamma] + dblmatrix[3,s + gamma])
+   for (int n=0; n<N; n++){
+       for (int alpha=0; alpha<N; alpha++){
+           for (int beta=0; beta<N; beta++){
+               for (int gamma=0; gamma<N; gamma++){
+                   for (int s=0; s<N; s++){
+                       for (int l=0; l<N; l++){
+                           p1p = dblr[4,beta - gamma + N - 1] * (singmatrix[0,alpha] - dblr[0,s + alpha] - singmatrix[4,alpha] + dbli[0,s + alpha])
+                           p2p = dblz[0,alpha - gamma + N - 1] * (singmatrix[0,beta] - dblr[0,s + beta] + singmatrix[4,beta] - dbli[0,s + beta])
+                           p3p = dblz[1,alpha - beta + N - 1] * (-singmatrix[1,gamma] + dblr[1,s + gamma] - singmatrix[5,gamma] + dbli[1,s + gamma])
 
-                           p1m = dblmatrix[6,beta - gamma + N - 1] * (singmatrix[2,alpha] - dblmatrix[0,s + alpha] - singmatrix[6,alpha] + dblmatrix[2,s + alpha])
+                           p1m = dblr[4,beta - gamma + N - 1] * (singmatrix[2,alpha] - dblr[0,s + alpha] - singmatrix[6,alpha] + dbli[0,s + alpha])
 
-                           p2m = dblmatrix[7,alpha - gamma + N - 1] * ( singmatrix[2,beta] - dblmatrix[0,s + beta] + singmatrix[6,beta] - dblmatrix[2,s + beta])
+                           p2m = dblz[0,alpha - gamma + N - 1] * ( singmatrix[2,beta] - dblr[0,s + beta] + singmatrix[6,beta] - dbli[0,s + beta])
 
-                           p3m = dblmatrix[8,alpha - beta + N - 1] * (-singmatrix[3,gamma] + dblmatrix[1,s + gamma] - singmatrix[7,gamma] + dblmatrix[3,s + gamma])
+                           p3m = dblz[1,alpha - beta + N - 1] * (-singmatrix[3,gamma] + dblr[1,s + gamma] - singmatrix[7,gamma] + dbli[1,s + gamma])
 
-                           d1 = -2 * complex(0, 1) * dblmatrix[6,beta - gamma + N - 1] * dblmatrix[7,alpha - gamma + N - 1] * dblmatrix[8,alpha - beta + N - 1]
+                           d1 = -2 * complex(0, 1) * dblr[4,beta - gamma + N - 1] * dblz[0,alpha - gamma + N - 1] * dblz[1,alpha - beta + N - 1]
 
                            omint1p = singmatrix[8,s] * ((p1p + p2p + p3p) / d1)
 
                            omint1m = singmatrix[9,s] * ((p1m + p2m + p3m) / d1)
 
-                           bess1 = dblmatrix[5,gamma - n + N - 1] * dblmatrix[5,gamma - l + N - 1] * dblmatrix[4,beta - l + N - 1] * dblmatrix[4,beta - s + N - 1] * dblmatrix[4,alpha - s + N - 1] * dblmatrix[4,alpha - n + N - 1]
+                           bess1 = dblr[3,gamma - n + N - 1] * dblr[3,gamma - l + N - 1] * dblr[2,beta - l + N - 1] * dblr[2,beta - s + N - 1] * dblr[2,alpha - s + N - 1] * dblr[2,alpha - n + N - 1]
 
                            grgl = bess1 * (omint1p - omint1m)
 
-                           pp1p = dblmatrix[6,alpha - beta + N - 1] * (-singmatrix[1,gamma] + dblmatrix[1,s + gamma] - singmatrix[5,gamma] + dblmatrix[3,s + gamma])
+                           pp1p = dblr[4,alpha - beta + N - 1] * (-singmatrix[1,gamma] + dblr[1,s + gamma] - singmatrix[5,gamma] + dbli[1,s + gamma])
 
-                           pp2p = dblmatrix[7,alpha - gamma + N - 1] * (-singmatrix[1,beta] + dblmatrix[1,s + beta] + singmatrix[5,beta] - dblmatrix[3,s + beta])
+                           pp2p = dblz[0,alpha - gamma + N - 1] * (-singmatrix[1,beta] + dblr[1,s + beta] + singmatrix[5,beta] - dbli[1,s + beta])
 
-                           pp3p = dblmatrix[8,beta - gamma + N - 1] * (singmatrix[0,alpha] - dblmatrix[0,s + alpha] - singmatrix[4,alpha] + dblmatrix[2,s + alpha])
+                           pp3p = dblz[1,beta - gamma + N - 1] * (singmatrix[0,alpha] - dblr[0,s + alpha] - singmatrix[4,alpha] + dbli[0,s + alpha])
 
-                           pp1m = dblmatrix[6,alpha - beta + N - 1] * (-singmatrix[3,gamma] + dblmatrix[1,s + gamma] - singmatrix[7,gamma] + dblmatrix[3,s + gamma])
+                           pp1m = dblr[4,alpha - beta + N - 1] * (-singmatrix[3,gamma] + dblr[1,s + gamma] - singmatrix[7,gamma] + dbli[1,s + gamma])
 
-                           pp2m = dblmatrix[7,alpha - gamma + N - 1] * (-singmatrix[3,beta] + dblmatrix[1,s + beta] + singmatrix[7,beta] - dblmatrix[3,s + beta])
+                           pp2m = dblz[0,alpha - gamma + N - 1] * (-singmatrix[3,beta] + dblr[1,s + beta] + singmatrix[7,beta] - dbli[1,s + beta])
 
-                           pp3m = dblmatrix[8,beta - gamma + N - 1] * (singmatrix[2,alpha] - dblmatrix[0,s + alpha] - singmatrix[6,alpha] + dblmatrix[2,s + alpha])
+                           pp3m = dblz[1,beta - gamma + N - 1] * (singmatrix[2,alpha] - dblr[0,s + alpha] - singmatrix[6,alpha] + dbli[0,s + alpha])
 
-                           d2 = -2 * complex(0, 1) * dblmatrix[6,alpha - beta + N - 1] * dblmatrix[7,alpha - gamma + N - 1] * dblmatrix[8,beta - gamma + N - 1]
+                           d2 = -2 * complex(0, 1) * dblr[4,alpha - beta + N - 1] * dblz[0,alpha - gamma + N - 1] * dblz[1,beta - gamma + N - 1]
 
                            omint2p = singmatrix[8,s] * ((pp1p + pp2p + pp3p) / d2)
 
                            omint2m = singmatrix[9,s] * ((pp1m + pp2m + pp3m) / d2)
 
-                           bess2 = dblmatrix[5,gamma - n + N - 1] * dblmatrix[5,gamma - s + N - 1] * dblmatrix[5,beta - s + N - 1] * dblmatrix[5,beta - l + N - 1] * dblmatrix[4,alpha - l + N - 1] * dblmatrix[4,alpha - n + N - 1]
+                           bess2 = dblr[3,gamma - n + N - 1] * dblr[3,gamma - s + N - 1] * dblr[3,beta - s + N - 1] * dblr[3,beta - l + N - 1] * dblr[2,alpha - l + N - 1] * dblr[2,alpha - n + N - 1]
 
                            glga = bess2 * (omint2p - omint2m)
 
                            dds = dds + Gamm * (grgl + glga)
-   return -8 * dds.real / CB(CUDART_PI_F);
+                        }
+                    }
+                }
+            }
+        }
+    }
+   return -8 * cuCrealf(dds) / CB(CUDART_PI_F);
 }
