@@ -104,7 +104,7 @@ float chi(float* rx, float wgt)
        dbl[7 + n * 2] = make_cuFloatComplex(ek - ekq + hOmg * i, 2 * Gamm);
        dbl[8 + n * 2] = make_cuFloatComplex(hOmg * i, 2 * Gamm);
 
-       n = n + 1
+       n = n + 1;
     }
 
     cuFloatComplex* I2;
