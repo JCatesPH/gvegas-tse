@@ -4,20 +4,6 @@
 
 #define CUDART_PI_F 3.141592654f
 
-/*-------- constants for chi ---------*/
-__constant__ float mu     = 0.1f;
-__constant__ float hOmg   = 0.3f;
-__constant__ float a      = 3.6f;
-__constant__ float A      = 4.f;
-__constant__ float rati   = 0.1;
-__constant__ float eE0    = 0.00711512; // rati * (hOmg * hOmg) / (2 * sqrt(A * mu))
-__constant__ float Gamm   = 0.003;
-__constant__ float KT     = 1e-6;
-__constant__ float shift  = 0.00225; // A * (eE0 / hOmg) * (eE0 / hOmg)
-__constant__ float Gammsq = 9e-6; // Gamm * Gamm
-__constant__ int N      = 3;
-
-
 __device__
 float heaviside(float x, float z)
 {
