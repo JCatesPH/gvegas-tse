@@ -58,7 +58,7 @@ float chi(float* rx, float wgt)
 
    // singmatrix = numba.cuda.shared.array((10,N),dtype=numba.types.complex128)
    cuFloatComplex* sing;
-   checkCudaErrors(cudaMalloc((void**)&sing, N*sizeof(cuFloatComplex)));
+   cudaMalloc((void**)&sing, N*sizeof(cuFloatComplex));
 
    int n = 0;
    for (int i=-(N-1)/2; i<((N-1)/2+1); i++) {
@@ -79,7 +79,7 @@ float chi(float* rx, float wgt)
    }
 
    cuFloatComplex* dbl;
-   checkCudaErrors(cudaMalloc((void**)&dbl, 9*(2*N-1)*sizeof(cuFloatComplex)));
+   cudaMalloc((void**)&dbl, 9*(2*N-1)*sizeof(cuFloatComplex));
 
    n = 0;
    for (int i=-(N-1); i < N; i++)
