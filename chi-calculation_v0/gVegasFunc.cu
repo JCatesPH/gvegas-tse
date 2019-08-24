@@ -15,7 +15,7 @@ __constant__ float Gamm   = 0.003;
 __constant__ float KT     = 1e-6;
 __constant__ float shift  = 0.00225; // A * (eE0 / hOmg) * (eE0 / hOmg)
 __constant__ float Gammsq = 9e-6; // Gamm * Gamm
-__constant__ float N      = 3;
+__constant__ int N      = 3;
 
 
 __device__
@@ -120,7 +120,7 @@ float chi(float* rx, float wgt)
                                     cuCaddf(
                                         cuCaddf(
                                             cuCmulf(
-                                                dbl[6+(beta - gamma + N - 1)*9], 
+                                                dbl[6+(beta - gamma + N - 1)*9],
                                                 cuCsubf(
                                                     cuCsubf(sing[alpha*10], dbl[(s+alpha)*9]), 
                                                     cuCaddf(sing[4+alpha*10], dbl[2+(s+alpha)*9])
@@ -145,7 +145,7 @@ float chi(float* rx, float wgt)
                                     cuCmulf(
                                         I2, 
                                         cuCmulf(
-                                            dbl[6 + (beta - gamma + N - 1) * 9], 
+                                            dbl[6 + (beta - gamma + N - 1) * 9],
                                             cuCmulf(
                                                 dbl[7+(alpha-gamma+N-1)*9], 
                                                 dbl[8+(alpha-beta+N-1)*9]
