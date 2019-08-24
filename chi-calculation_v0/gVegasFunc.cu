@@ -38,7 +38,6 @@ float heaviside(float x, float z)
 __device__
 float chi(float* rx, float wgt)
 {
-   float dds = 0.f;
    // ds = 0  // UNUSED
    float ek;
    float ekq;
@@ -107,9 +106,7 @@ float chi(float* rx, float wgt)
        n = n + 1;
     }
 
-    cuFloatComplex* I2;
-    checkCudaErrors(cudaMalloc((void**)&I2, sizeof(cuFloatComplex)));
-    I2 = make_cuFloatComplex(0, -2);
+    cuFloatComplex I2 = make_cuFloatComplex(0, -2);
 
     cuFloatComplex* omint1p;
     checkCudaErrors(cudaMalloc((void**)&omint1p, sizeof(cuFloatComplex)));
