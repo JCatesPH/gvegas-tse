@@ -108,21 +108,14 @@ float chi(float* rx, float wgt)
 
     cuFloatComplex I2 = make_cuFloatComplex(0, -2);
 
-    cuFloatComplex* omint1p;
-    checkCudaErrors(cudaMalloc((void**)&omint1p, sizeof(cuFloatComplex)));
-    cuFloatComplex* omint1m;
-    checkCudaErrors(cudaMalloc((void**)&omint1m, sizeof(cuFloatComplex)));
-    cuFloatComplex* bess1;
-    checkCudaErrors(cudaMalloc((void**)&bess1, sizeof(cuFloatComplex)));
-    cuFloatComplex* omint2p;
-    checkCudaErrors(cudaMalloc((void**)&omint2p, sizeof(cuFloatComplex)));
-    cuFloatComplex* omint2m;
-    checkCudaErrors(cudaMalloc((void**)&omint2m, sizeof(cuFloatComplex)));
-    cuFloatComplex* bess2;
-    checkCudaErrors(cudaMalloc((void**)&bess2, sizeof(cuFloatComplex)));
-    cuFloatComplex* dds;
-    checkCudaErrors(cudaMalloc((void**)&dds, sizeof(cuFloatComplex)));
-    
+    cuFloatComplex omint1p;
+    cuFloatComplex omint1m;
+    cuFloatComplex bess1;
+    cuFloatComplex omint2p;
+    cuFloatComplex omint2m;
+    cuFloatComplex bess2;
+    cuFloatComplex dds;
+
 
    for (int n=0; n<N; n++){
        for (int alpha=0; alpha<N; alpha++){
