@@ -59,7 +59,7 @@ SMS ?= 35 60 70
 
 # For Virutal Architecture with Kepler Support and GPU Features providing Basic and Kepler Support
 # CUDACCFLAGS := --ptxas-options=-v --gpu-architecture=compute_32 --gpu-code=sm_32
-CUDACCFLAGS := -lcublas -lcurand -cudart=shared: -lcudadevrt -lcudart #-lgomp
+CUDACCFLAGS := -lcublas -lcurand -lcudadevrt -lcudart #-lgomp
 
 ################################################################################
 # Rules and targets
