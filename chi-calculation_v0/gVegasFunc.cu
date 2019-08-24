@@ -10,11 +10,11 @@
 #define a       3.6f
 #define A       4.f
 #define rati    0.1
-#define eE0     rati * (hOmg * hOmg) / (2 * sqrt(A * mu))
+#define eE0     0.00711512 // rati * (hOmg * hOmg) / (2 * sqrt(A * mu))
 #define Gamm    0.003
 #define KT      1e-6
-#define shift   A * (eE0 / hOmg) * (eE0 / hOmg)
-#define Gammsq  Gamm * Gamm
+#define shift   0.00225 // A * (eE0 / hOmg) * (eE0 / hOmg)
+#define Gammsq  9e-6 // Gamm * Gamm
 #define N       3
 
 /*-------- helpful macros ---------*/
