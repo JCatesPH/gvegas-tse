@@ -57,6 +57,7 @@ float chi(float* rx, float wgt)
    xkq = 2 * A * eE0 * hypotf(rx[0] + rx[2], rx[1]) / SQ(hOmg);
 
    // singmatrix = numba.cuda.shared.array((10,N),dtype=numba.types.complex128)
+   cuFloatComplex *sing, *dbl;
    sing = (cuFloatComplex*)malloc(10*N*sizeof(cuFloatComplex));
 
    int n = 0;
