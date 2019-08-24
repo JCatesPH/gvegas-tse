@@ -94,14 +94,14 @@ int main(int argc, char* argv[])
     //"The integrand is Ds(kx,ky,qx,qy)/(2*pi)^3, and the limits of integration are kx=[-pi/a,pi/a],ky=[-pi/a,pi/a] , qx=[-pi/a,pi/a] and qy=[-pi/a,pi/a]."
     //"For qx and qy it is more efficient to use qx=[0.001,pi/a] and qy=0, because of the symmetry of the problem. kx and ky should be as we said before kx=[-pi/a,pi/a],ky=[-pi/a,pi/a]."
 
-    xl[0] = -3.14159265358979 / 4 // kxi
-    xu[0] = 3.14159265358979  / 4 // kxf
+    xl[0] = -3.14159265358979 / 4; // kxi
+    xu[0] = 3.14159265358979  / 4; // kxf
  
-    xl[1] = -3.14159265358979 / 4 // kyi
-    xu[1] = 3.14159265358979f / 4 // kyf
+    xl[1] = -3.14159265358979 / 4; // kyi
+    xu[1] = 3.14159265358979f / 4; // kyf
  
-    xl[2] = 0.001                // qxi
-    xu[2] = 3.14159265358979 / 4 // qxf
+    xl[2] = 0.001;                // qxi
+    xu[2] = 3.14159265358979 / 4; // qxf
  
     /*---------------------------------------------*/
 //If nprn = 1 it prints the whole work, when nprn = 0, just the text in this code.
