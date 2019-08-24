@@ -5,21 +5,18 @@
 #define CUDART_PI_F 3.141592654f
 
 /*-------- constants for chi ---------*/
-#define mu      0.1f
-#define hOmg    0.3f
-#define a       3.6f
-#define A       4.f
-#define rati    0.1
-#define eE0     0.00711512 // rati * (hOmg * hOmg) / (2 * sqrt(A * mu))
-#define Gamm    0.003
-#define KT      1e-6
-#define shift   0.00225 // A * (eE0 / hOmg) * (eE0 / hOmg)
-#define Gammsq  9e-6 // Gamm * Gamm
-#define N       3
+__constant__ float mu     = 0.1f;
+__constant__ float hOmg   = 0.3f;
+__constant__ float a      = 3.6f;
+__constant__ float A      = 4.f;
+__constant__ float rati   = 0.1;
+__constant__ float eE0    = 0.00711512; // rati * (hOmg * hOmg) / (2 * sqrt(A * mu))
+__constant__ float Gamm   = 0.003;
+__constant__ float KT     = 1e-6;
+__constant__ float shift  = 0.00225; // A * (eE0 / hOmg) * (eE0 / hOmg)
+__constant__ float Gammsq = 9e-6; // Gamm * Gamm
+__constant__ float N      = 3;
 
-/*-------- helpful macros ---------*/
-#define SQ(x)  (x * x) // Squares the argument
-#define CB(x)  (x * x * x) // Cubes the argument
 
 __device__
 float heaviside(float x, float z)
@@ -45,16 +42,16 @@ float chi(float* rx, float wgt)
    float xkq;
 
    // ek = A * (sqrt((rx[0]) ** 2 + (rx[1]) ** 2)) ** 2 + A * (eE0 / hOmg) ** 2
-   ek = A * hypotf(rx[0], rx[1]) * hypotf(rx[0], rx[1]) + A * SQ(eE0 / hOmg);
+   ek = A * hypotf(rx[0], rx[1]) * hypotf(rx[0], rx[1]) + A * (eE0 / hOmg) * (eE0 / hOmg);
 
    // ekq = A * (sqrt((rx[0] + qx) ** 2 + (rx[1] + 0) ** 2)) ** 2 + A * (eE0 / hOmg) ** 2
-   ekq = A * hypotf(rx[0] + rx[2], rx[1]) * hypotf(rx[0] + rx[2], rx[1]) + A * SQ(eE0 / hOmg);
+   ekq = A * hypotf(rx[0] + rx[2], rx[1]) * hypotf(rx[0] + rx[2], rx[1]) + A * (eE0 / hOmg) * (eE0 / hOmg);
 
    // xk = 2 * A * eE0 * sqrt((rx[0]) ** 2 + (rx[1]) ** 2) / hOmg ** 2
-   xk = 2 * A * eE0 * hypotf(rx[0], rx[1]) / SQ(hOmg);
+   xk = 2 * A * eE0 * hypotf(rx[0], rx[1]) / (hOmg * hOmg);
 
    // xkq = 2 * A * eE0 * sqrt((rx[0] + qx) ** 2 + (rx[1] + 0) ** 2) / hOmg ** 2
-   xkq = 2 * A * eE0 * hypotf(rx[0] + rx[2], rx[1]) / SQ(hOmg);
+   xkq = 2 * A * eE0 * hypotf(rx[0] + rx[2], rx[1]) / (hOmg * hOmg);
 
    // singmatrix = numba.cuda.shared.array((10,N),dtype=numba.types.complex128)
    cuFloatComplex *sing, *dbl;
@@ -70,10 +67,10 @@ float chi(float* rx, float wgt)
     sing[8 + n * 6] = make_cuFloatComplex(heaviside(mu - hOmg / 2 - hOmg * i, 0.f), 0); 
     sing[9 + n * 6] = make_cuFloatComplex(heaviside(mu + hOmg / 2 - hOmg * i, 0.f), 0); 
 
-    sing[4 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + SQ(ek - hOmg / 2 + hOmg * i)));  
-    sing[5 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + SQ(ekq - hOmg / 2 + hOmg * i))); 
-    sing[6 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + SQ(ek + hOmg / 2 + hOmg * i)));  
-    sing[7 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + SQ(ekq + hOmg / 2 + hOmg * i))); 
+    sing[4 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ek - hOmg / 2 + hOmg * i)*(ek - hOmg / 2 + hOmg * i)));  
+    sing[5 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ekq - hOmg / 2 + hOmg * i)*(ekq - hOmg / 2 + hOmg * i))); 
+    sing[6 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ek + hOmg / 2 + hOmg * i)*(ek + hOmg / 2 + hOmg * i)));  
+    sing[7 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ekq + hOmg / 2 + hOmg * i)*(ekq + hOmg / 2 + hOmg * i))); 
 
     n = n + 1;
    }
@@ -91,8 +88,8 @@ float chi(float* rx, float wgt)
 
        dbl[6 + n * 5] = make_cuFloatComplex(ek - ekq + hOmg * i, 0);
 
-       dbl[2 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + SQ(ek - mu + hOmg * i)));
-       dbl[3 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + SQ(ekq - mu + hOmg * i)));
+       dbl[2 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + (ek - mu + hOmg * i)*(ek - mu + hOmg * i)));
+       dbl[3 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + (ekq - mu + hOmg * i)*(ekq - mu + hOmg * i)));
 
        dbl[7 + n * 2] = make_cuFloatComplex(ek - ekq + hOmg * i, 2 * Gamm);
        dbl[8 + n * 2] = make_cuFloatComplex(hOmg * i, 2 * Gamm);
@@ -353,5 +350,6 @@ float chi(float* rx, float wgt)
     free(sing);
     free(dbl);
     
-    return -8 * cuCrealf(dds) / CB(CUDART_PI_F);
+    // return -8 * cuCrealf(dds) / (3.141592654*3.141592654*3.141592654);
+    return cuCrealf(dds);
 }
