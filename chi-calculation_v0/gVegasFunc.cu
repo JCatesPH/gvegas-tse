@@ -57,8 +57,7 @@ float chi(float* rx, float wgt)
    xkq = 2 * A * eE0 * hypotf(rx[0] + rx[2], rx[1]) / SQ(hOmg);
 
    // singmatrix = numba.cuda.shared.array((10,N),dtype=numba.types.complex128)
-   cuFloatComplex* sing;
-   cudaMalloc((void**)&sing, N*sizeof(cuFloatComplex));
+   sing = (cuFloatComplex*)malloc(10*N*sizeof(cuFloatComplex));
 
    int n = 0;
    for (int i=-(N-1)/2; i<((N-1)/2+1); i++) {
@@ -78,8 +77,7 @@ float chi(float* rx, float wgt)
     n = n + 1;
    }
 
-   cuFloatComplex* dbl;
-   cudaMalloc((void**)&dbl, 9*(2*N-1)*sizeof(cuFloatComplex));
+   dbl = (cuFloatComplex*)malloc(9*(2*N-1)*sizeof(cuFloatComplex));
 
    n = 0;
    for (int i=-(N-1); i < N; i++)
@@ -350,5 +348,9 @@ float chi(float* rx, float wgt)
             }
         }
     }
-   return -8 * cuCrealf(dds) / CB(CUDART_PI_F);
+
+    free(sing);
+    free(dbl);
+    
+    return -8 * cuCrealf(dds) / CB(CUDART_PI_F);
 }
