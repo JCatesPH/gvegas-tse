@@ -70,8 +70,6 @@ float chi(float* rx, float wgt)
     sing[8 + n * 6] = make_cuFloatComplex(heaviside(mu - hOmg / 2 - hOmg * i, 0.f), 0); 
     sing[9 + n * 6] = make_cuFloatComplex(heaviside(mu + hOmg / 2 - hOmg * i, 0.f), 0); 
 
-    //------//
-
     sing[4 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + SQ(ek - hOmg / 2 + hOmg * i)));  
     sing[5 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + SQ(ekq - hOmg / 2 + hOmg * i))); 
     sing[6 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + SQ(ek + hOmg / 2 + hOmg * i)));  
@@ -84,7 +82,8 @@ float chi(float* rx, float wgt)
    checkCudaErrors(cudaMalloc((void**)&dbl, 2*(2*N-1)*sizeof(cuFloatComplex)));
 
    n = 0;
-   for (int i=-(N - 1); i < N; i++){
+   for (int i=-(N-1); i < N; i++)
+   {
        dbl[0 + n * 5] = make_cuFloatComplex(2 * atan2f(Gamm, (ek - mu + hOmg * i)), 0);
        dbl[1 + n * 5] = make_cuFloatComplex(2 * atan2f(Gamm, (ekq - mu + hOmg * i)), 0);
 
@@ -93,12 +92,8 @@ float chi(float* rx, float wgt)
 
        dbl[6 + n * 5] = make_cuFloatComplex(ek - ekq + hOmg * i, 0);
 
-       //------//
-
        dbl[2 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + SQ(ek - mu + hOmg * i)));
        dbl[3 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + SQ(ekq - mu + hOmg * i)));
-
-       //------//
 
        dbl[7 + n * 2] = make_cuFloatComplex(ek - ekq + hOmg * i, 2 * Gamm);
        dbl[8 + n * 2] = make_cuFloatComplex(hOmg * i, 2 * Gamm);
@@ -123,16 +118,6 @@ float chi(float* rx, float wgt)
                for (int gamma=0; gamma<N; gamma++){
                    for (int s=0; s<N; s++){
                        for (int l=0; l<N; l++){
-                            // p1p = dbl[6+(beta - gamma + N - 1)*9] * (sing[0+alpha*10] - dbl[0+(s+alpha)*9] - sing[4+alpha*10] + dbl[2+(s+alpha)*9])
-                            // p2p = dbl[7+(alpha-gamma+N-1)*9] * (sing[0+beta*10] - dbl[0+(s+beta)*9] + sing[4+beta*10] - dbl[2+(s+beta)*9])
-                            // p3p = dbl[8+(alpha-beta+N-1)*9] * (-sing[1+gamma*10] + dbl[1+(s+gamma)*9] - sing[5+gamma*10] + dbl[3+(s+gamma)*9])
-
-                            // p1m = dbl[6 + (beta - gamma + N - 1) * 9] * (sing[2+alpha*10] - dbl[(s+alpha)*9] - sing[6+alpha*10] + dbl[2+(s+alpha)*9])
-                            // p2m = dbl[7+(alpha-gamma+N-1)*9] * ( sing[2+beta*10] - dbl[0+(s+beta)*9] + sing[6+beta*10] - dbl[2+(s+beta)*9])
-                            // p3m = dbl[8+(alpha-beta+N-1)*9] * (-sing[3+gamma*10] + dbl[1+(s+gamma)*9] - sing[7+gamma*10] + dbl[3+(s+gamma)*9])
-
-                            // d1 = cuCmulf(2I, cuCmulf(dbl[6 + (beta - gamma + N - 1) * 9], cuCmulf(dbl[7+(alpha-gamma+N-1)*9], dbl[8+(alpha-beta+N-1)*9])))
-
                             omint1p = cuCmulf(
                                 sing[8+s*10], 
                                 cuCdivf(
