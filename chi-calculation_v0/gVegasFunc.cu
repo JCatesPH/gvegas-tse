@@ -166,7 +166,7 @@ float chi(float* rx, float wgt)
                                                 cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
                                                 cuCaddf(sing[5+gamma*10], dbl[3+(s+gamma)*9])
                                             )
-                                        ),
+                                        )
                                     ),  
                                     cuCmulf(
                                         I2, 
