@@ -34,14 +34,15 @@
 ################################################################################
 
 # Add source files here
-EXECUTABLE	:= gvegas_example
+EXECUTABLE	:= chi_loops
 
 # Cuda source files (compiled with cudacc)
-CUFILES		:= gVegasMain.cu
+CUFILES		:= myVegasMain.cu
 
 # CUDA dependency files
-CU_DEPS      := gVegasMain.cu gVegas.cu gVegasCallFunc.cu gVegasFunc.cu
-CCFILES	     := getrusage_sec.cpp
+CU_DEPS      := gVegasFunc.cu myVegas.cu myVegasCallFilla.cu xorshift.cu
+CCFILES	     := 
+HFILES		 :=
 
 COMMONDIR := ../
 
@@ -64,5 +65,5 @@ CUDACCFLAGS := -lcublas -lcurand -lcudadevrt -lcudart -lgomp
 ################################################################################
 # Rules and targets
 
-$(EXECUTABLE) :  $(CUFILES) $(CU_DEPS) # $(CCFILES)
-	nvcc -o $@  myVegasMain.cu $(CUDACCFLAGS)
+$(EXECUTABLE) :  $(CUFILES) $(CU_DEPS) $(CCFILES)
+	nvcc -o $@  $(CUFILES) $(CUDACCFLAGS)
