@@ -18,14 +18,15 @@ float heaviside(float x, float z)
     
 }
 
+
 __device__
 float chi(float* rx, float wgt)
 {
    // ds = 0  // UNUSED
-   float ek;
-   float ekq;
-   float xk;
-   float xkq;
+   double ek;
+   double ekq;
+   double xk;
+   double xkq;
 
    // ek = A * (sqrt((rx[0]) ** 2 + (rx[1]) ** 2)) ** 2 + A * (eE0 / hOmg) ** 2
    ek = A * hypotf(rx[0], rx[1]) * hypotf(rx[0], rx[1]) + A * (eE0 / hOmg) * (eE0 / hOmg);
@@ -40,18 +41,33 @@ float chi(float* rx, float wgt)
    xkq = 2 * A * eE0 * hypotf(rx[0] + rx[2], rx[1]) / (hOmg * hOmg);
 
    // singmatrix = numba.cuda.shared.array((10,N),dtype=numba.types.complex128)
-   cuFloatComplex *sing, *dbl;
-   sing = (cuFloatComplex*)malloc(10*N*sizeof(cuFloatComplex));
+   double *singr, *singi, *dblr, *dbli;
+
+   sing = (double*)malloc(10*N*sizeof(double));
+   sing = (double*)malloc(10*N*sizeof(double));
+   
+   dbl = (double*)malloc(9*(2*N-1)*sizeof(double));
+   dbl = (double*)malloc(9*(2*N-1)*sizeof(double));
+
 
    int n = 0;
    for (int i=-(N-1)/2; i<((N-1)/2+1); i++) {
-    sing[0 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ek - hOmg / 2 + hOmg * i), 0);
-    sing[1 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ekq - hOmg / 2 + hOmg * i), 0);
-    sing[2 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ek + hOmg / 2 + hOmg * i), 0);
-    sing[3 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ekq + hOmg / 2 + hOmg * i), 0);
+    singr[0 + n * 6] = 2 * atan2f(Gamm, ek - hOmg / 2 + hOmg * i);
+    singi[0 + n * 6] = 0;
 
-    sing[8 + n * 10] = make_cuFloatComplex(heaviside(mu - hOmg / 2 - hOmg * i, 0.f), 0); 
-    sing[9 + n * 10] = make_cuFloatComplex(heaviside(mu + hOmg / 2 - hOmg * i, 0.f), 0); 
+    singr[1 + n * 6] = 2 * atan2f(Gamm, ekq - hOmg / 2 + hOmg * i); 
+    singi[1 + n * 6] = 0;
+
+    singr[2 + n * 6] = 2 * atan2f(Gamm, ek + hOmg / 2 + hOmg * i); 
+    singi[2 + n * 6] = 0;
+
+    singr[3 + n * 6] = 2 * atan2f(Gamm, ekq + hOmg / 2 + hOmg * i);
+    singi[3 + n * 6] = 0;
+
+    singr[8 + n * 6] = heaviside(mu - hOmg / 2 - hOmg * i, 0.f); 
+    singi[8 + n * 6] = 0; 
+    
+    sing[9 + n * 6] = make_cuFloatComplex(heaviside(mu + hOmg / 2 - hOmg * i, 0.f), 0); 
 
     sing[4 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ek - hOmg / 2 + hOmg * i)*(ek - hOmg / 2 + hOmg * i)));  
     sing[5 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ekq - hOmg / 2 + hOmg * i)*(ekq - hOmg / 2 + hOmg * i))); 
@@ -61,24 +77,22 @@ float chi(float* rx, float wgt)
     n = n + 1;
    }
 
-   dbl = (cuFloatComplex*)malloc(9*(2*N-1)*sizeof(cuFloatComplex));
-
    n = 0;
    for (int i=-(N-1); i < N; i++)
    {
-       dbl[0 + n * 9] = make_cuFloatComplex(2 * atan2f(Gamm, (ek - mu + hOmg * i)), 0);
-       dbl[1 + n * 9] = make_cuFloatComplex(2 * atan2f(Gamm, (ekq - mu + hOmg * i)), 0);
+       dbl[0 + n * 5] = make_cuFloatComplex(2 * atan2f(Gamm, (ek - mu + hOmg * i)), 0);
+       dbl[1 + n * 5] = make_cuFloatComplex(2 * atan2f(Gamm, (ekq - mu + hOmg * i)), 0);
 
-       dbl[4 + n * 9] = make_cuFloatComplex(jnf(i, xk), 0); // Bessel function of order i
-       dbl[5 + n * 9] = make_cuFloatComplex(jnf(i, xkq), 0);
+       dbl[4 + n * 5] = make_cuFloatComplex(jnf(i, xk), 0); // Bessel function of order i
+       dbl[5 + n * 5] = make_cuFloatComplex(jnf(i, xkq), 0);
 
-       dbl[6 + n * 9] = make_cuFloatComplex(ek - ekq + hOmg * i, 0);
+       dbl[6 + n * 5] = make_cuFloatComplex(ek - ekq + hOmg * i, 0);
 
-       dbl[2 + n * 9] = make_cuFloatComplex(0, logf(Gammsq + (ek - mu + hOmg * i)*(ek - mu + hOmg * i)));
-       dbl[3 + n * 9] = make_cuFloatComplex(0, logf(Gammsq + (ekq - mu + hOmg * i)*(ekq - mu + hOmg * i)));
+       dbl[2 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + (ek - mu + hOmg * i)*(ek - mu + hOmg * i)));
+       dbl[3 + n * 2] = make_cuFloatComplex(0, logf(Gammsq + (ekq - mu + hOmg * i)*(ekq - mu + hOmg * i)));
 
-       dbl[7 + n * 9] = make_cuFloatComplex(ek - ekq + hOmg * i, 2 * Gamm);
-       dbl[8 + n * 9] = make_cuFloatComplex(hOmg * i, 2 * Gamm);
+       dbl[7 + n * 2] = make_cuFloatComplex(ek - ekq + hOmg * i, 2 * Gamm);
+       dbl[8 + n * 2] = make_cuFloatComplex(hOmg * i, 2 * Gamm);
 
        n = n + 1;
     }
