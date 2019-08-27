@@ -124,7 +124,7 @@ float chi(float* rx, float wgt)
                                             dbl[8+(alpha-beta+N-1)*9], 
                                             cuCaddf(
                                                 cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
-                                                cuCsubf(dbl[3+(s+gamma)*9, sing[5+gamma*10])
+                                                cuCsubf(dbl[3+(s+gamma)*9], sing[5+gamma*10])
                                             )
                                         )
                                     ),  
