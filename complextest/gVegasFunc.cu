@@ -20,9 +20,9 @@ float heaviside(float x, float z)
 __device__
 float func(float* rx, float wgt)
 {
-    float sum = 0.f;
-    float *vector; 
-    vector = (float*)malloc(4*sizeof(float));
+    double sum = 0;
+    double *vector; 
+    vector = (double*)malloc(4*sizeof(double));
 
     for (int j=0; j<4; j++) {
         vector[j] = rx[j];
@@ -34,7 +34,7 @@ float func(float* rx, float wgt)
 
     free(vector);
 
-    return sum;
+    return (float)sum;
 }
 
 /*
