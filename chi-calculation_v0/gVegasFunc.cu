@@ -45,18 +45,18 @@ float chi(float* rx, float wgt)
 
    int n = 0;
    for (int i=-(N-1)/2; i<((N-1)/2+1); i++) {
-    sing[0 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ek - hOmg / 2 + hOmg * i), 0);
-    sing[1 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ekq - hOmg / 2 + hOmg * i), 0);
-    sing[2 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ek + hOmg / 2 + hOmg * i), 0);
-    sing[3 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ekq + hOmg / 2 + hOmg * i), 0);
+    sing[0 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ek - hOmg2 + hOmg * i), 0);
+    sing[1 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ekq - hOmg2 + hOmg * i), 0);
+    sing[2 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ek + hOmg2 + hOmg * i), 0);
+    sing[3 + n * 10] = make_cuFloatComplex(2 * atan2f(Gamm, ekq + hOmg2 + hOmg * i), 0);
 
-    sing[8 + n * 10] = make_cuFloatComplex(heaviside(mu - hOmg / 2 - hOmg * i, 0.f), 0); 
-    sing[9 + n * 10] = make_cuFloatComplex(heaviside(mu + hOmg / 2 - hOmg * i, 0.f), 0); 
+    sing[8 + n * 10] = make_cuFloatComplex(heaviside(mu - hOmg2 - hOmg * i, 0.f), 0); 
+    sing[9 + n * 10] = make_cuFloatComplex(heaviside(mu + hOmg2 - hOmg * i, 0.f), 0); 
 
-    sing[4 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ek - hOmg / 2 + hOmg * i)*(ek - hOmg / 2 + hOmg * i)));  
-    sing[5 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ekq - hOmg / 2 + hOmg * i)*(ekq - hOmg / 2 + hOmg * i))); 
-    sing[6 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ek + hOmg / 2 + hOmg * i)*(ek + hOmg / 2 + hOmg * i)));  
-    sing[7 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ekq + hOmg / 2 + hOmg * i)*(ekq + hOmg / 2 + hOmg * i))); 
+    sing[4 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ek - hOmg2 + hOmg * i)*(ek - hOmg2 + hOmg * i)));  
+    sing[5 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ekq - hOmg2 + hOmg * i)*(ekq - hOmg2 + hOmg * i))); 
+    sing[6 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ek + hOmg2 + hOmg * i)*(ek + hOmg2 + hOmg * i)));  
+    sing[7 + n * 10] = make_cuFloatComplex(0, logf(Gammsq + (ekq + hOmg2 + hOmg * i)*(ekq + hOmg2 + hOmg * i))); 
 
     n = n + 1;
    }

@@ -103,10 +103,11 @@ void myVegas(double& avgi, double& sd, double& chi2a)
    //----------------------------------
    //  Set parameters in the integrand.
    //----------------------------------
-   mu_h     = 0.1f;
-   hOmg_h   = 0.3f;
-   a_h      = 3.6f;
-   A_h      = 4.f;
+   mu_h     = 0.1;
+   hOmg_h   = 0.3;
+   hOmg2_h  = hOmg_h / 2;
+   a_h      = 3.6;
+   A_h      = 4;
    rati_h   = 0.1;
    eE0_h    = rati_h * (hOmg_h * hOmg_h) / (2 * sqrt(A_h * mu_h));
    Gamm_h   = 0.003;
@@ -118,6 +119,7 @@ void myVegas(double& avgi, double& sd, double& chi2a)
    // Move the parameters to the GPU memory.
    checkCudaErrors(cudaMemcpyToSymbol(mu,          &mu_h,  sizeof(float)));
    checkCudaErrors(cudaMemcpyToSymbol(hOmg,      &hOmg_h,  sizeof(float)));
+   checkCudaErrors(cudaMemcpyToSymbol(hOmg2,    &hOmg2_h,  sizeof(float)));
    checkCudaErrors(cudaMemcpyToSymbol(a,            &a_h,  sizeof(float)));
    checkCudaErrors(cudaMemcpyToSymbol(A,            &A_h,  sizeof(float)));
    checkCudaErrors(cudaMemcpyToSymbol(rati,      &rati_h,  sizeof(float)));

@@ -26,6 +26,7 @@ __device__ float offset[ndim_max]; //Goes from 0 to 1 in every variable but can 
 //----------------------------------
 __device__ __constant__ float mu;
 __device__ __constant__ float hOmg;
+__device__ __constant__ float hOmg2;
 __device__ __constant__ float a;
 __device__ __constant__ float A;
 __device__ __constant__ float rati;
@@ -35,6 +36,8 @@ __device__ __constant__ float KT;
 __device__ __constant__ float shift; // A * (eE0 / hOmg) * (eE0 / hOmg)
 __device__ __constant__ float Gammsq; // Gamm * Gamm
 __device__ __constant__ int   N;
+__device__ __constant__ int   iota;
+__device__ __constant__ int   kappa;
 //----------------------------------
 
 #endif

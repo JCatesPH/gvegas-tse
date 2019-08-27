@@ -44,6 +44,7 @@ EXTERN unsigned nCubes;
 //----------------------------------
 EXTERN float mu_h;
 EXTERN float hOmg_h;
+EXTERN float hOmg2_h;
 EXTERN float a_h;
 EXTERN float A_h;
 EXTERN float rati_h;
