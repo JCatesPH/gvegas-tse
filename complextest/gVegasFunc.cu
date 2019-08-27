@@ -17,6 +17,30 @@ float heaviside(float x, float z)
     }
     
 }
+
+
+// ztest6
+__device__
+float func(float* rx, float wgt)
+{
+    cuFloatComplex sum = make_cuFloatComplex(0.f, 0.f);
+    cuFloatComplex *vector;
+    vector = (cuFloatComplex*)malloc(2*sizeof(cuFloatComplex));
+
+    cuFloatComplex vector[0] = make_cuFloatComplex(rx[0], rx[1]);
+    cuFloatComplex vector[1] = make_cuFloatComplex(rx[2], rx[3]);
+    
+    sum = cuCaddf(vector[0], vector[1]);
+    
+    free(vector);
+
+    return cuCrealf(sum);
+}
+
+
+/*
+
+// ztest5, dbltest
 __device__
 float func(float* rx, float wgt)
 {
@@ -36,9 +60,11 @@ float func(float* rx, float wgt)
 
     return (float)sum;
 }
+*/
 
 /*
 
+// ztest2/3/4
 __device__
 float func(float* rx, float wgt)
 {
@@ -54,8 +80,10 @@ float func(float* rx, float wgt)
 
 */
 
+
 /*
 
+// ztest1
 __device__
 float func(float* rx, float wgt)
 {
