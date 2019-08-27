@@ -103,17 +103,17 @@ void myVegas(double& avgi, double& sd, double& chi2a)
    //----------------------------------
    //  Set parameters in the integrand.
    //----------------------------------
-   float mu_h     = 0.1f;
-   float hOmg_h   = 0.3f;
-   float a_h      = 3.6f;
-   float A_h      = 4.f;
-   float rati_h   = 0.1;
-   float eE0_h    = rati * (hOmg * hOmg) / (2 * sqrt(A * mu));
-   float Gamm_h   = 0.003;
-   float KT_h     = 1e-6;
-   float shift_h  = A * (eE0 / hOmg) * (eE0 / hOmg);
-   float Gammsq_h = Gamm * Gamm;
-   int   N_h      = 3;
+   mu_h     = 0.1f;
+   hOmg_h   = 0.3f;
+   a_h      = 3.6f;
+   A_h      = 4.f;
+   rati_h   = 0.1;
+   eE0_h    = rati * (hOmg * hOmg) / (2 * sqrt(A * mu));
+   Gamm_h   = 0.003;
+   KT_h     = 1e-6;
+   shift_h  = A * (eE0 / hOmg) * (eE0 / hOmg);
+   Gammsq_h = Gamm * Gamm;
+   N_h      = 3;
 
    // Move the parameters to the GPU memory.
    checkCudaErrors(cudaMemcpyToSymbol(mu,          &mu_h,  sizeof(float)));
@@ -127,6 +127,7 @@ void myVegas(double& avgi, double& sd, double& chi2a)
    checkCudaErrors(cudaMemcpyToSymbol(shift,    &shift_h,  sizeof(float)));
    checkCudaErrors(cudaMemcpyToSymbol(Gammsq,  &Gammsq_h,  sizeof(float)));
    checkCudaErrors(cudaMemcpyToSymbol(N,            &N_h,  sizeof(int)));
+   cudaThreadSynchronize(); // wait for synchronize
    //----------------------------------
 
    ndo = 1;

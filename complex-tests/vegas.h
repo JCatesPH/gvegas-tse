@@ -39,6 +39,22 @@ EXTERN unsigned nCubes;
 
 //adding stuff, don't know if it's right...
 
+//----------------------------------
+//  Set the parameters on the host.
+//----------------------------------
+EXTERN float mu_h;
+EXTERN float hOmg_h;
+EXTERN float a_h;
+EXTERN float A_h;
+EXTERN float rati_h;
+EXTERN float eE0_h;
+EXTERN float Gamm_h;
+EXTERN float KT_h;
+EXTERN float shift_h;
+EXTERN float Gammsq_h;
+EXTERN int   N_h;
+//----------------------------------
+
 #undef EXTERN
 
 #endif

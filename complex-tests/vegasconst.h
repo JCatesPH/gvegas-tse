@@ -21,7 +21,9 @@ __device__ float move[ndim_max]; //Goes from 0 to 1 in every variable.
 __device__ float offset[ndim_max]; //Goes from 0 to 1 in every variable but can be renormalized to change "difficulty".
 
 
-/*-------- constants for chi ---------*/
+//----------------------------------
+//  Set the parameters on the GPU.
+//----------------------------------
 __device__ __constant__ float mu;
 __device__ __constant__ float hOmg;
 __device__ __constant__ float a;
@@ -33,7 +35,7 @@ __device__ __constant__ float KT;
 __device__ __constant__ float shift; // A * (eE0 / hOmg) * (eE0 / hOmg)
 __device__ __constant__ float Gammsq; // Gamm * Gamm
 __device__ __constant__ int   N;
-
+//----------------------------------
 
 #endif
 
