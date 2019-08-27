@@ -21,6 +21,7 @@ __device__
 float func(float* rx, float wgt)
 {
     float sum = 0.f;
+    float *vector; 
     vector = (float*)malloc(4*sizeof(float));
 
     for (int j=0; j<4; j++) {
