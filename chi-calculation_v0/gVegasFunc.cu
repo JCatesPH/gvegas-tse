@@ -91,7 +91,7 @@ float chi(float* rx, float wgt)
     cuFloatComplex omint2p;
     cuFloatComplex omint2m;
     cuFloatComplex bess2;
-    cuFloatComplex dds;
+    cuFloatComplex dds = make_cuFloatComplex(0, 0);
 
 
    for (int n=0; n<N; n++){
@@ -122,9 +122,9 @@ float chi(float* rx, float wgt)
                                         ), 
                                         cuCmulf(
                                             dbl[8+(alpha-beta+N-1)*9], 
-                                            cuCsubf(
+                                            cuCaddf(
                                                 cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
-                                                cuCaddf(sing[5+gamma*10], dbl[3+(s+gamma)*9])
+                                                cuCsubf(dbl[3+(s+gamma)*9, sing[5+gamma*10])
                                             )
                                         )
                                     ),  
@@ -148,24 +148,24 @@ float chi(float* rx, float wgt)
                                         cuCaddf(
                                             cuCmulf(
                                                 dbl[6+(beta-gamma+N-1) * 9], 
-                                                cuCsubf(
+                                                cuCaddf(
                                                     cuCsubf(sing[2+alpha*10], dbl[(s+alpha)*9]), 
-                                                    cuCaddf(sing[6+alpha*10], dbl[2+(s+alpha)*9])
+                                                    cuCsubf(dbl[2+(s+alpha)*9], sing[6+alpha*10])
                                                 )
                                             ),  
                                             cuCmulf(
                                                 dbl[7+(alpha-gamma+N-1)*9], 
-                                                cuCsubf(
+                                                cuCaddf(
                                                     cuCsubf(sing[2+beta*10], dbl[(s+beta)*9]), 
-                                                    cuCaddf(sing[6+beta*10], dbl[2+(s+beta)*9])
+                                                    cuCsubf(sing[6+beta*10], dbl[2+(s+beta)*9])
                                                 )
                                             )
                                         ), 
                                         cuCmulf(
                                             dbl[8+(alpha-beta+N-1)*9], 
-                                            cuCsubf(
+                                            cuCaddf(
                                                 cuCsubf(dbl[1+(s+gamma)*9], sing[3+gamma*10]), 
-                                                cuCaddf(sing[7+gamma*10], dbl[3+(s+gamma)*9])
+                                                cuCsubf(dbl[3+(s+gamma)*9], sing[7+gamma*10])
                                             )
                                         )
                                     ),  
@@ -205,14 +205,14 @@ float chi(float* rx, float wgt)
                                     cuCaddf(
                                         cuCmulf(
                                             dbl[6+(alpha-beta+N-1)*9], 
-                                            cuCsubf(
+                                            cuCaddf(
                                                 cuCsubf(dbl[1+(s+gamma)*9], sing[1+gamma*10]), 
-                                                cuCaddf(sing[5+gamma*10], dbl[3+(s+gamma)*9])
+                                                cuCsubf(dbl[3+(s+gamma)*9], sing[5+gamma*10])
                                             )
                                         ), 
                                         cuCaddf(
                                             cuCmulf(
-                                                dbl[7+(alpha-beta+N-1)*9],
+                                                dbl[7+(alpha-gamma+N-1)*9],
                                                 cuCaddf(
                                                     cuCsubf(dbl[1+(s+beta)*9], sing[1+beta*10]), 
                                                     cuCsubf(sing[5+beta*10], dbl[3+(s+beta)*9])
@@ -220,9 +220,9 @@ float chi(float* rx, float wgt)
                                             ), 
                                             cuCmulf(
                                                 dbl[8+(beta-gamma+N-1)*9],
-                                                cuCsubf(
-                                                    cuCsubf(sing[alpha*10], dbl[0 + (s+alpha) * 9]), 
-                                                    cuCaddf(sing[4+alpha*10], dbl[2 + (s+alpha) * 9])
+                                                cuCaddf(
+                                                    cuCsubf(sing[alpha*10], dbl[(s+alpha) * 9]), 
+                                                    cuCsubf(dbl[2+(s+alpha)*9], sing[4+alpha*10])
                                                 )
                                             )
                                         )
@@ -248,7 +248,7 @@ float chi(float* rx, float wgt)
                                             dbl[6+(alpha-beta+N-1)*9],
                                             cuCsubf(
                                                 cuCsubf(dbl[1+(s+gamma)*9], sing[3+gamma*10]),
-                                                cuCaddf(sing[7+gamma*10], dbl[3+(s+gamma)*9])
+                                                cuCsubf(dbl[3+(s+gamma)*9], sing[7+gamma*10])
                                             )
                                         ), 
                                         cuCaddf(
@@ -261,9 +261,9 @@ float chi(float* rx, float wgt)
                                             ), 
                                             cuCmulf(
                                                 dbl[8+(beta-gamma+N-1)*9],
-                                                cuCsubf(
-                                                    cuCsubf(sing[2+alpha*10], dbl[0 + (s+alpha) * 9]),
-                                                    cuCaddf(sing[6+alpha*10], dbl[2 + (s+alpha) * 9])
+                                                cuCaddf(
+                                                    cuCsubf(sing[2+alpha*10], dbl[(s+alpha)*9]),
+                                                    cuCsubf(dbl[2+(s+alpha)*9], sing[6+alpha*10])
                                                 )
                                             )
                                         )
