@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
    int ncall0 = 100;
    int itmx0 = 10;
    int nacc  = 1;
-   int nBlockSize0 = 256;
+   int nBlockSize0 = 320;
    int ndim0 = 10;
    int c;
 
