@@ -28,7 +28,7 @@ float func(float* rx, float wgt)
     }
     
     for (int j=0; j<4; j++) {
-        sum += rx[j];
+        sum += vector[j];
     }
 
     free(vector);
