@@ -108,11 +108,11 @@ void myVegas(double& avgi, double& sd, double& chi2a)
    a_h      = 3.6f;
    A_h      = 4.f;
    rati_h   = 0.1;
-   eE0_h    = rati * (hOmg * hOmg) / (2 * sqrt(A * mu));
+   eE0_h    = rati_h * (hOmg_h * hOmg_h) / (2 * sqrt(A_h * mu_h));
    Gamm_h   = 0.003;
    KT_h     = 1e-6;
-   shift_h  = A * (eE0 / hOmg) * (eE0 / hOmg);
-   Gammsq_h = Gamm * Gamm;
+   shift_h  = A_h * (eE0_h / hOmg_h) * (eE0_h / hOmg_h);
+   Gammsq_h = Gamm_h * Gamm_h;
    N_h      = 3;
 
    // Move the parameters to the GPU memory.
