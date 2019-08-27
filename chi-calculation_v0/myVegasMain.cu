@@ -37,10 +37,10 @@ int main(int argc, char* argv[])
    //   nBlockSize = nBlockSize0 is the size of the CUDA block
    //   ndim = ndim0 is the dimension of the integration space
 
-   int ncall0 = 1000;
+   int ncall0 = 500;
    int itmx0 = 100;
    int nacc  = 1;
-   int nBlockSize0 = 256;
+   int nBlockSize0 = 128;
    int ndim0 = 3;
    int c;
 
