@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
    //   nBlockSize = nBlockSize0 is the size of the CUDA block
    //   ndim = ndim0 is the dimension of the integration space
 
-   int ncall0 = 100;
-   int itmx0 = 20;
+   int ncall0 = 1000;
+   int itmx0 = 50;
    int nacc  = 1;
    int nBlockSize0 = 320;
    int ndim0 = 4;
@@ -97,8 +97,8 @@ int main(int argc, char* argv[])
 //If nprn = 1 it prints the whole work, when nprn = 0, just the text in this code.
 //If nprn = -1, we can get the grid update information.
 
-//  nprn = 1;
-  nprn = -1;
+  nprn = 1;
+//  nprn = -1;
 //  nprn = 0;
 
    double avgi = 0.;
