@@ -17,8 +17,44 @@ float heaviside(float x, float z)
     }
     
 }
+__device__
+float func(float* rx, float wgt)
+{
+    float sum = 0.f;
+    vector = (float*)malloc(4*sizeof(float));
+
+    for (int j=0; j<4; j++) {
+        vector[j] = rx[j];
+    }
+    
+    for (int j=0; j<4; j++) {
+        sum += rx[j];
+    }
+
+    free(vector);
+
+    return sum;
+}
 
 /*
+
+__device__
+float func(float* rx, float wgt)
+{
+    cuFloatComplex z1 = make_cuFloatComplex(rx[0], rx[1]);
+    cuFloatComplex z2 = make_cuFloatComplex(rx[2], rx[3]);
+    
+    cuFloatComplex result;
+
+    result = cuCdivf(z1, z2);
+
+    return A * cuCrealf(result);
+}
+
+*/
+
+/*
+
 __device__
 float func(float* rx, float wgt)
 {
@@ -40,17 +76,5 @@ float func(float* rx, float wgt)
 
     return cuCrealf(sum);
 }
+
 */
-
-__device__
-float func(float* rx, float wgt)
-{
-    cuFloatComplex z1 = make_cuFloatComplex(rx[0], rx[1]);
-    cuFloatComplex z2 = make_cuFloatComplex(rx[2], rx[3]);
-    
-    cuFloatComplex result;
-
-    result = cuCdivf(z1, z2);
-
-    return A * cuCrealf(result);
-}
