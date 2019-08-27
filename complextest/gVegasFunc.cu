@@ -52,5 +52,5 @@ float func(float* rx, float wgt)
 
     result = cuCdivf(z1, z2);
 
-    return cuCrealf(result);
+    return A * cuCrealf(result);
 }
