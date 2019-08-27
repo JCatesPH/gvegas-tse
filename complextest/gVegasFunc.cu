@@ -18,6 +18,7 @@ float heaviside(float x, float z)
     
 }
 
+/*
 __device__
 float func(float* rx, float wgt)
 {
@@ -38,4 +39,18 @@ float func(float* rx, float wgt)
     free(vector);
 
     return cuCrealf(sum);
+}
+*/
+
+__device__
+float func(float* rx, float wgt)
+{
+    cuFloatComplex z1 = make_cuFloatComplex(rx[0], rx[1]);
+    cuFloatComplex z2 = make_cuFloatComplex(rx[2], rx[3]);
+    
+    cuFloatComplex result;
+
+    result = cuCdivf(z1, z2);
+
+    return cuCrealf(result);
 }

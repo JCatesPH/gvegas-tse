@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
    int itmx0 = 10;
    int nacc  = 1;
    int nBlockSize0 = 320;
-   int ndim0 = 10;
+   int ndim0 = 4;
    int c;
 
    while ((c = getopt (argc, argv, "n:i:a:b:d:")) != -1)
