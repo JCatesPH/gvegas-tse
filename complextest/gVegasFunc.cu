@@ -27,8 +27,8 @@ float func(float* rx, float wgt)
     cuFloatComplex *vector;
     vector = (cuFloatComplex*)malloc(2*sizeof(cuFloatComplex));
 
-    cuFloatComplex vector[0] = make_cuFloatComplex(rx[0], rx[1]);
-    cuFloatComplex vector[1] = make_cuFloatComplex(rx[2], rx[3]);
+    vector[0] = make_cuFloatComplex(rx[0], rx[1]);
+    vector[1] = make_cuFloatComplex(rx[2], rx[3]);
     
     sum = cuCaddf(vector[0], vector[1]);
     
