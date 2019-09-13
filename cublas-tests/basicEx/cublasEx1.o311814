@@ -1,0 +1,29 @@
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: cudatest
+  The time limit is 01:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/cublas-tests
+  The working directory is:  /scratch-local/ualjmc.cublasEx1.311814
+  The memory limit is: 1gb
+  The job will start running after: 2019-08-18T19:51:54
+  Job Name: cublasEx1
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Using  1  cores on master node  dmc2
+  Node list:  dmc2
+  Nodes:  dmc2
+  Command typed:
+/apps/scripts/run_gpu cudatest     
+  Queue submit command:
+sbatch --qos=gpu -J cublasEx1 --begin=2019-08-18T19:51:54 --requeue --mail-user=jmcates@crimson.ua.edu -o cublasEx1.o311814 -t 01:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=1000mb  
+ 
+Assigning GPU 2 to this job.
+      1      7     13     19     25     31
+      2      8     14     20     26     32
+      3   1728    180    252    324    396
+      4    160     16     22     28     34
+      5    176     17     23     29     35

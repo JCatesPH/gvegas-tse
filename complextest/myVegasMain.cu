@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
    int itmx0 = 50;
    int nacc  = 1;
    int nBlockSize0 = 320;
-   int ndim0 = 4;
+   int ndim0 = 2;
    int c;
 
    while ((c = getopt (argc, argv, "n:i:a:b:d:")) != -1)
@@ -89,8 +89,8 @@ int main(int argc, char* argv[])
 
    /*-------- Setting integration limits ---------*/
    for (int i=0;i<ndim;i++) {
-      xl[i] = 1.;
-      xu[i] = 10.;
+      xl[i] = 0.;
+      xu[i] = 5.;
    }
  
     /*---------------------------------------------*/

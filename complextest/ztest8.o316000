@@ -1,0 +1,78 @@
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: test_complex
+  The time limit is 01:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/complextest
+  The working directory is:  /scratch-local/ualjmc.ztest8.316000
+  The memory limit is: 1gb
+  The job will start running after: 2019-09-03T14:55:05
+  Job Name: ztest8
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Using  1  cores on master node  dmc4
+  Node list:  dmc4
+  Nodes:  dmc4
+  Command typed:
+/apps/scripts/run_gpu test_complex     
+  Queue submit command:
+sbatch --qos=gpu -J ztest8 --begin=2019-09-03T14:55:05 --requeue --mail-user=jmcates@crimson.ua.edu -o ztest8.o316000 -t 01:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=1000mb  
+ 
+Assigning GPU 0 to this job.
+ncall, ndim = 262144, 4
+mds = 1
+
+ << vegas internal parameters >>
+            ng:    19
+            nd:    50
+           npg:     2
+        nCubes:       130321
+    nCubes*npg:       260642
+
+ << input parameters for vegas >>
+     ndim =  4   ncall =    260642
+     it   =  0   itmx =   50
+     acc  =     0.000
+     mds  =  1   nd =   50
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    320
+       Grid size            =    408 x 1
+     Actual Number of calls =      261120
+   Required Number of calls =      260642 (  99.82%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  6795.52
+                          std dev  = 0.02
+     accumulated results: integral = 6795.52
+                          std dev  = 0.02
+
+ << integration by vegas >>
+     iteration no.    2   integral=  6795.09
+                          std dev  = 0.01
+     accumulated results: integral = 6795.12
+                          std dev  = 0.01
+                          chi**2 per it'n = 304.648752
+#===========================
+# No. of Thread Block Size : 320
+#===========================
+# No. of dimensions        : 4
+# No. of func calls / iter : 262144
+# No. of max. iterations   : 50
+# Desired accuracy         : 0.000001
+#===========================
+# Answer                   : 6795.122847 +- 0.006412
+# Chisquare                : 304.648752
+#===========================
+#===========================
+# Function call time per iteration: 0.199902
+# Refining time per iteration: 0.000122
+#===========================

@@ -7,8 +7,8 @@ __device__ double doubleti, doubletsi;
 
 
 __global__
-void initzero(void){
-
+void initzero(void)
+{
 /*
   for (int dim = 0; dim < g_ndim; dim++){
     for (int box = 0; box < g_nd; box++){

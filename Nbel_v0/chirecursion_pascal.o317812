@@ -1,0 +1,50 @@
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: chi_recursion
+  The time limit is 01:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/Nbel_v0
+  The working directory is:  /scratch-local/ualjmc.chirecursion_pascal.317812
+  The memory limit is: 1gb
+  The job will start running after: 2019-09-10T12:25:23
+  Job Name: chirecursion_pascal
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Using  1  cores on master node  dmc201
+  Node list:  dmc201
+  Nodes:  dmc201
+  Command typed:
+/apps/scripts/run_gpu chi_recursion     
+  Queue submit command:
+sbatch --qos=gpu -J chirecursion_pascal --begin=2019-09-10T12:25:23 --requeue --mail-user=jmcates@crimson.ua.edu -o chirecursion_pascal.o317812 -t 01:00:00 --gres=gpu:pascal:1 -N 1-1 -n 1 --mem-per-cpu=1000mb  
+ 
+Assigning GPU 0 to this job.
+ncall, ndim = 16384, 3
+mds = 1
+
+ << vegas internal parameters >>
+            ng:    20
+            nd:    50
+           npg:     2
+        nCubes:         8000
+    nCubes*npg:        16000
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =     16000
+     it   =  0   itmx =   10
+     acc  =     0.000
+     mds  =  1   nd =   50
+    (xl,xu)= ( -0.250 , 0.250 )
+    (xl,xu)= ( -0.785 , 0.785 )
+    (xl,xu)= ( -0.785 , 0.785 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =     32 x 1
+     Actual Number of calls =       16384
+   Required Number of calls =       16000 (  97.66%)
+
+CUDA error at myVegas.cu:279 code=700(an illegal memory access was encountered) "cudaMemcpyFromSymbol(&ti, doubleti, sizeof(double))" 

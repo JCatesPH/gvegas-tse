@@ -1,0 +1,418 @@
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: test_complex
+  The time limit is 01:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/complextest
+  The working directory is:  /scratch-local/ualjmc.ztest9.316012
+  The memory limit is: 1gb
+  The job will start running after: 2019-09-03T15:55:43
+  Job Name: ztest9
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Using  1  cores on master node  dmc4
+  Node list:  dmc4
+  Nodes:  dmc4
+  Command typed:
+/apps/scripts/run_gpu test_complex     
+  Queue submit command:
+sbatch --qos=gpu -J ztest9 --begin=2019-09-03T15:55:43 --requeue --mail-user=jmcates@crimson.ua.edu -o ztest9.o316012 -t 01:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=1000mb  
+ 
+Assigning GPU 0 to this job.
+ncall, ndim = 262144, 8
+mds = 1
+
+ << vegas internal parameters >>
+            ng:     4
+            nd:    50
+           npg:     4
+        nCubes:        65536
+    nCubes*npg:       262144
+
+ << input parameters for vegas >>
+     ndim =  8   ncall =    262144
+     it   =  0   itmx =   50
+     acc  =     0.000
+     mds  =  1   nd =   50
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+    (xl,xu)= (  1.000 , 10.000 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    320
+       Grid size            =    205 x 1
+     Actual Number of calls =      262400
+   Required Number of calls =      262144 (  99.90%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  89164912.00
+                          std dev  = 2835.01
+     accumulated results: integral = 89164912.00
+                          std dev  = 2835.01
+
+ << integration by vegas >>
+     iteration no.    2   integral=  89175392.00
+                          std dev  = 1134.36
+     accumulated results: integral = 89173946.00
+                          std dev  = 1053.13
+                          chi**2 per it'n =  11.778276
+
+ << integration by vegas >>
+     iteration no.    3   integral=  89171344.000000
+                          std dev  = 996.676937
+     accumulated results: integral = 89172573.371186
+                          std dev  = 723.891294
+                          chi**2 per it'n =   7.499209
+
+ << integration by vegas >>
+     iteration no.    4   integral=  89168256.000000
+                          std dev  = 976.749627
+     accumulated results: integral = 89171042.776961
+                          std dev  = 581.583360
+                          chi**2 per it'n =   9.203095
+
+ << integration by vegas >>
+     iteration no.    5   integral=  89167632.000000
+                          std dev  = 975.955344
+     accumulated results: integral = 89170149.007171
+                          std dev  = 499.603250
+                          chi**2 per it'n =   9.155593
+
+ << integration by vegas >>
+     iteration no.    6   integral=  89169192.000000
+                          std dev  = 979.735679
+     accumulated results: integral = 89169951.509203
+                          std dev  = 445.075741
+                          chi**2 per it'n =   7.475927
+
+ << integration by vegas >>
+     iteration no.    7   integral=  89172808.000000
+                          std dev  = 986.216170
+     accumulated results: integral = 89170434.875897
+                          std dev  = 405.676702
+                          chi**2 per it'n =   7.391551
+
+ << integration by vegas >>
+     iteration no.    8   integral=  89178176.000000
+                          std dev  = 996.187231
+     accumulated results: integral = 89171536.196365
+                          std dev  = 375.716863
+                          chi**2 per it'n =  13.735774
+
+ << integration by vegas >>
+     iteration no.    9   integral=  89185256.000000
+                          std dev  = 1011.481587
+     accumulated results: integral = 89173200.154145
+                          std dev  = 352.203217
+                          chi**2 per it'n =  32.232889
+
+ << integration by vegas >>
+     iteration no.   10   integral=  89194152.000000
+                          std dev  = 1034.959419
+     accumulated results: integral = 89175375.664695
+                          std dev  = 333.424962
+                          chi**2 per it'n =  69.475738
+
+ << integration by vegas >>
+     iteration no.   11   integral=  89205064.000000
+                          std dev  = 1070.951252
+     accumulated results: integral = 89178000.688983
+                          std dev  = 318.353105
+                          chi**2 per it'n = 132.620749
+
+ << integration by vegas >>
+     iteration no.   12   integral=  89218296.000000
+                          std dev  = 1126.000259
+     accumulated results: integral = 89180985.837069
+                          std dev  = 306.345834
+                          chi**2 per it'n = 228.443922
+
+ << integration by vegas >>
+     iteration no.   13   integral=  89234192.000000
+                          std dev  = 1209.998554
+     accumulated results: integral = 89184194.483206
+                          std dev  = 296.978633
+                          chi**2 per it'n = 360.966514
+
+ << integration by vegas >>
+     iteration no.   14   integral=  89253168.000000
+                          std dev  = 1337.765799
+     accumulated results: integral = 89187438.723044
+                          std dev  = 289.926006
+                          chi**2 per it'n = 528.306965
+
+ << integration by vegas >>
+     iteration no.   15   integral=  89275808.000000
+                          std dev  = 1531.091550
+     accumulated results: integral = 89190503.376076
+                          std dev  = 284.872629
+                          chi**2 per it'n = 720.611814
+
+ << integration by vegas >>
+     iteration no.   16   integral=  89302664.000000
+                          std dev  = 1821.157141
+     accumulated results: integral = 89193188.508094
+                          std dev  = 281.463168
+                          chi**2 per it'n = 919.840689
+
+ << integration by vegas >>
+     iteration no.   17   integral=  89334392.000000
+                          std dev  = 2251.285929
+     accumulated results: integral = 89195368.008980
+                          std dev  = 279.306851
+                          chi**2 per it'n = 1104.952766
+
+ << integration by vegas >>
+     iteration no.   18   integral=  89371696.000000
+                          std dev  = 2880.068402
+     accumulated results: integral = 89197016.820798
+                          std dev  = 278.025918
+                          chi**2 per it'n = 1258.921903
+
+ << integration by vegas >>
+     iteration no.   19   integral=  89415280.000000
+                          std dev  = 3784.573248
+     accumulated results: integral = 89198193.553436
+                          std dev  = 277.307569
+                          chi**2 per it'n = 1373.256493
+
+ << integration by vegas >>
+     iteration no.   20   integral=  89465952.000000
+                          std dev  = 5063.239543
+     accumulated results: integral = 89198998.564431
+                          std dev  = 276.927147
+                          chi**2 per it'n = 1448.121184
+
+ << integration by vegas >>
+     iteration no.   21   integral=  89524224.000000
+                          std dev  = 6836.389690
+     accumulated results: integral = 89199534.725723
+                          std dev  = 276.740630
+                          chi**2 per it'n = 1488.953844
+
+ << integration by vegas >>
+     iteration no.   22   integral=  89590488.000000
+                          std dev  = 9243.755081
+     accumulated results: integral = 89199887.456400
+                          std dev  = 276.663145
+                          chi**2 per it'n = 1503.280051
+
+ << integration by vegas >>
+     iteration no.   23   integral=  89664832.000000
+                          std dev  = 12433.902900
+     accumulated results: integral = 89200119.572388
+                          std dev  = 276.647376
+                          chi**2 per it'n = 1498.460195
+
+ << integration by vegas >>
+     iteration no.   24   integral=  89746840.000000
+                          std dev  = 16550.117502
+     accumulated results: integral = 89200273.867955
+                          std dev  = 276.667811
+                          chi**2 per it'n = 1480.595291
+
+ << integration by vegas >>
+     iteration no.   25   integral=  89835624.000000
+                          std dev  = 21711.587321
+     accumulated results: integral = 89200378.245668
+                          std dev  = 276.710844
+                          chi**2 per it'n = 1454.311112
+
+ << integration by vegas >>
+     iteration no.   26   integral=  89929872.000000
+                          std dev  = 28001.324159
+     accumulated results: integral = 89200450.441153
+                          std dev  = 276.769132
+                          chi**2 per it'n = 1422.911337
+
+ << integration by vegas >>
+     iteration no.   27   integral=  90028192.000000
+                          std dev  = 35486.531980
+     accumulated results: integral = 89200501.554641
+                          std dev  = 276.838572
+                          chi**2 per it'n = 1388.644570
+
+ << integration by vegas >>
+     iteration no.   28   integral=  90128712.000000
+                          std dev  = 44176.607505
+     accumulated results: integral = 89200538.621138
+                          std dev  = 276.916642
+                          chi**2 per it'n = 1353.022888
+
+ << integration by vegas >>
+     iteration no.   29   integral=  90226776.000000
+                          std dev  = 53893.545241
+     accumulated results: integral = 89200566.215922
+                          std dev  = 277.001289
+                          chi**2 per it'n = 1317.049107
+
+ << integration by vegas >>
+     iteration no.   30   integral=  90318568.000000
+                          std dev  = 64451.437181
+     accumulated results: integral = 89200587.278184
+                          std dev  = 277.090695
+                          chi**2 per it'n = 1281.364614
+
+ << integration by vegas >>
+     iteration no.   31   integral=  90399576.000000
+                          std dev  = 75653.809140
+     accumulated results: integral = 89200603.701239
+                          std dev  = 277.183020
+                          chi**2 per it'n = 1246.353455
+
+ << integration by vegas >>
+     iteration no.   32   integral=  90467968.000000
+                          std dev  = 87443.015989
+     accumulated results: integral = 89200616.715038
+                          std dev  = 277.276589
+                          chi**2 per it'n = 1212.242330
+
+ << integration by vegas >>
+     iteration no.   33   integral=  90529880.000000
+                          std dev  = 99889.464670
+     accumulated results: integral = 89200627.189104
+                          std dev  = 277.370574
+                          chi**2 per it'n = 1179.210056
+
+ << integration by vegas >>
+     iteration no.   34   integral=  90587192.000000
+                          std dev  = 113303.855868
+     accumulated results: integral = 89200635.691504
+                          std dev  = 277.464455
+                          chi**2 per it'n = 1147.336086
+
+ << integration by vegas >>
+     iteration no.   35   integral=  90647184.000000
+                          std dev  = 128787.264298
+     accumulated results: integral = 89200642.566158
+                          std dev  = 277.558453
+                          chi**2 per it'n = 1116.628079
+
+ << integration by vegas >>
+     iteration no.   36   integral=  90705208.000000
+                          std dev  = 146387.764880
+     accumulated results: integral = 89200648.107557
+                          std dev  = 277.652360
+                          chi**2 per it'n = 1087.076801
+
+ << integration by vegas >>
+     iteration no.   37   integral=  90747240.000000
+                          std dev  = 163811.314155
+     accumulated results: integral = 89200652.660654
+                          std dev  = 277.744796
+                          chi**2 per it'n = 1058.709389
+
+ << integration by vegas >>
+     iteration no.   38   integral=  90746064.000000
+                          std dev  = 182129.142519
+     accumulated results: integral = 89200656.341028
+                          std dev  = 277.832298
+                          chi**2 per it'n = 1031.435870
+
+ << integration by vegas >>
+     iteration no.   39   integral=  90715576.000000
+                          std dev  = 201799.385001
+     accumulated results: integral = 89200659.277758
+                          std dev  = 277.912883
+                          chi**2 per it'n = 1005.224374
+
+ << integration by vegas >>
+     iteration no.   40   integral=  90690552.000000
+                          std dev  = 219147.501256
+     accumulated results: integral = 89200661.725444
+                          std dev  = 277.987486
+                          chi**2 per it'n = 980.132172
+
+ << integration by vegas >>
+     iteration no.   41   integral=  90579608.000000
+                          std dev  = 218724.198740
+     accumulated results: integral = 89200663.994072
+                          std dev  = 278.049959
+                          chi**2 per it'n = 956.209511
+
+ << integration by vegas >>
+     iteration no.   42   integral=  90558472.000000
+                          std dev  = 208375.003901
+     accumulated results: integral = 89200666.454176
+                          std dev  = 278.107837
+                          chi**2 per it'n = 933.550755
+
+ << integration by vegas >>
+     iteration no.   43   integral=  90409456.000000
+                          std dev  = 181736.606945
+     accumulated results: integral = 89200669.323903
+                          std dev  = 278.152108
+                          chi**2 per it'n = 912.098644
+
+ << integration by vegas >>
+     iteration no.   44   integral=  90440080.000000
+                          std dev  = 157088.179262
+     accumulated results: integral = 89200673.264807
+                          std dev  = 278.196402
+                          chi**2 per it'n = 892.068245
+
+ << integration by vegas >>
+     iteration no.   45   integral=  90489160.000000
+                          std dev  = 137835.640713
+     accumulated results: integral = 89200678.591944
+                          std dev  = 278.241971
+                          chi**2 per it'n = 873.519831
+
+ << integration by vegas >>
+     iteration no.   46   integral=  90433616.000000
+                          std dev  = 126692.511497
+     accumulated results: integral = 89200684.618105
+                          std dev  = 278.281656
+                          chi**2 per it'n = 855.992573
+
+ << integration by vegas >>
+     iteration no.   47   integral=  90504856.000000
+                          std dev  = 131293.801915
+     accumulated results: integral = 89200690.562802
+                          std dev  = 278.324389
+                          chi**2 per it'n = 839.298816
+
+ << integration by vegas >>
+     iteration no.   48   integral=  90524168.000000
+                          std dev  = 135763.063882
+     accumulated results: integral = 89200696.207235
+                          std dev  = 278.366605
+                          chi**2 per it'n = 823.239934
+
+ << integration by vegas >>
+     iteration no.   49   integral=  90552520.000000
+                          std dev  = 138125.651472
+     accumulated results: integral = 89200701.780486
+                          std dev  = 278.408892
+                          chi**2 per it'n = 807.865903
+
+ << integration by vegas >>
+     iteration no.   50   integral=  90611944.000000
+                          std dev  = 140814.098688
+     accumulated results: integral = 89200707.385989
+                          std dev  = 278.453188
+                          chi**2 per it'n = 793.206099
+#===========================
+# No. of Thread Block Size : 320
+#===========================
+# No. of dimensions        : 8
+# No. of func calls / iter : 262144
+# No. of max. iterations   : 50
+# Desired accuracy         : 0.000001
+#===========================
+# Answer                   : 89200707.385989 +- 278.453188
+# Chisquare                : 793.206099
+#===========================
+#===========================
+# Function call time per iteration: 0.172094
+# Refining time per iteration: 0.000193
+#===========================

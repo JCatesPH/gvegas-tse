@@ -1,0 +1,19 @@
+ 
+============================================================
+=====     Queued job information at submit time        =====
+============================================================
+  The submitted file is: test_complex
+  The time limit is 01:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/complextest
+  The memory limit is: 1gb
+  The job will start running after: 2019-09-03T14:55:05
+  Job Name: ztest8
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Command typed:
+/apps/scripts/run_gpu test_complex     
+  Queue submit command:
+sbatch --qos=gpu -J ztest8 --begin=2019-09-03T14:55:05 --requeue --mail-user=jmcates@crimson.ua.edu -o ztest8.o$SLURM_JOB_ID -t 01:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=1000mb  
+  Job number: 316000
+ 
