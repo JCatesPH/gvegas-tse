@@ -11,6 +11,7 @@
 #include "gvegas.h"
 
 #include "getrusage_sec.h"
+#define PI          3.14159265358979f
 
 void gVegas(double& avgi, double& sd, double& chi2a)
 {
@@ -251,6 +252,12 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    double startVegasMove, endVegasMove;
    double startVegasFill, endVegasFill;
    double startVegasRefine, endVegasRefine;
+
+   //==============================================================//
+   // Attempt to expand heap size. Perhaps the memory allocation in the device is too large.
+   int sizeComplex = (4 * N_h * N_h + 9 * N_h + 24 + 2) * sizeof(cuDoubleComplex);
+   cudaDeviceSetLimit(cudaLimitMallocHeapSize, sizeComplex * 1024 * 1024);
+   //==============================================================//
 
    do {
       
