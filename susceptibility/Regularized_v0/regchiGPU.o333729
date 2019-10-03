@@ -8839,3 +8839,101 @@ Assigning GPU 1 to this job.
      accumulated results: integral = 0.851955
                           std dev  = 0.006187
                           chi**2 per it'n =     0.7564
+
+ << integration by vegas >>
+     iteration no.   93   integral=  0.920988
+                          std dev  = 0.058186
+     accumulated results: integral = 0.852864
+                          std dev  = 0.006152
+                          chi**2 per it'n =     0.7645
+
+ << integration by vegas >>
+     iteration no.   94   integral=  0.965048
+                          std dev  = 0.058211
+     accumulated results: integral = 0.854462
+                          std dev  = 0.006118
+                          chi**2 per it'n =     0.8047
+
+ << integration by vegas >>
+     iteration no.   95   integral=  0.830697
+                          std dev  = 0.060551
+     accumulated results: integral = 0.854232
+                          std dev  = 0.006087
+                          chi**2 per it'n =     0.7980
+
+ << integration by vegas >>
+     iteration no.   96   integral=  0.863425
+                          std dev  = 0.059761
+     accumulated results: integral = 0.854330
+                          std dev  = 0.006056
+                          chi**2 per it'n =     0.7896
+
+ << integration by vegas >>
+     iteration no.   97   integral=  0.764854
+                          std dev  = 0.059632
+     accumulated results: integral = 0.853588
+                          std dev  = 0.006025
+                          chi**2 per it'n =     0.8018
+
+ << integration by vegas >>
+     iteration no.   98   integral=  0.945722
+                          std dev  = 0.058619
+     accumulated results: integral = 0.854780
+                          std dev  = 0.005993
+                          chi**2 per it'n =     0.8227
+
+ << integration by vegas >>
+     iteration no.   99   integral=  0.777564
+                          std dev  = 0.059785
+     accumulated results: integral = 0.854136
+                          std dev  = 0.005963
+                          chi**2 per it'n =     0.8298
+
+ << integration by vegas >>
+     iteration no.  100   integral=  0.777249
+                          std dev  = 0.059823
+     accumulated results: integral = 0.853502
+                          std dev  = 0.005933
+                          chi**2 per it'n =     0.8366
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.000100
+#=============================
+# Result                    : 8.53502e-01  +- 5.93341e-03  ( 0.6952 %)
+# Chisquare                 : 0.8366
+#=============================
+# Total Execution Time(sec) :   852.5675
+#=============================
+# Time for func calls (sec) :   850.2896 ( 99.73%)
+# Time for data transf (sec):     0.1309 (  0.02%)
+# Time for data fill (sec)  :     2.1134 (  0.25%)
+# Time for grid refine (sec):     0.0068 (  0.00%)
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.000
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+

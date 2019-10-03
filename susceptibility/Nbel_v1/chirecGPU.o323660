@@ -1,0 +1,135 @@
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: chi_rec
+  The time limit is 01:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/susceptibility/Nbel_v1
+  The working directory is:  /scratch-local/ualjmc.chirecGPU.323660
+  The memory limit is: 200mb
+  The job will start running after: 2019-09-19T11:35:15
+  Job Name: chirecGPU
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Using  1  cores on master node  dmc2
+  Node list:  dmc2
+  Nodes:  dmc2
+  Command typed:
+/apps/scripts/run_gpu chi_rec     
+  Queue submit command:
+sbatch --qos=gpu -J chirecGPU --begin=2019-09-19T11:35:15 --requeue --mail-user=jmcates@crimson.ua.edu -o chirecGPU.o323660 -t 01:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=200mb  
+ 
+Assigning GPU 0 to this job.
+
+ << vegas internal parameters >>
+            ng:    25
+            nd:    25
+           npg:     2
+        nCubes:        15625
+    nCubes*npg:        31250
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =     31250
+     it   =  0   itmx =   10
+     acc  =     0.000
+     mds  = -1   nd =   25
+    (xl,xu)= ( -0.250 , 0.250 )
+    (xl,xu)= ( -0.873 , 0.873 )
+    (xl,xu)= ( -0.873 , 0.873 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =    123 x 1
+     Actual Number of calls =       31488
+   Required Number of calls =       31250 (  99.24%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.238332
+                          std dev  = 0.027677
+     accumulated results: integral = 0.238332
+                          std dev  = 0.027677
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.218103
+                          std dev  = 0.003989
+     accumulated results: integral = 0.218592
+                          std dev  = 0.004127
+                          chi**2 per it'n =     0.5674
+
+ << integration by vegas >>
+     iteration no.    3   integral=  0.211035
+                          std dev  = 0.002583
+     accumulated results: integral = 0.213412
+                          std dev  = 0.002257
+                          chi**2 per it'n =     1.5066
+
+ << integration by vegas >>
+     iteration no.    4   integral=  0.216180
+                          std dev  = 0.002512
+     accumulated results: integral = 0.214607
+                          std dev  = 0.001689
+                          chi**2 per it'n =     1.2390
+
+ << integration by vegas >>
+     iteration no.    5   integral=  0.214428
+                          std dev  = 0.002619
+     accumulated results: integral = 0.214557
+                          std dev  = 0.001423
+                          chi**2 per it'n =     0.9413
+
+ << integration by vegas >>
+     iteration no.    6   integral=  0.212261
+                          std dev  = 0.003151
+     accumulated results: integral = 0.214190
+                          std dev  = 0.001297
+                          chi**2 per it'n =     0.8458
+
+ << integration by vegas >>
+     iteration no.    7   integral=  0.213640
+                          std dev  = 0.002945
+     accumulated results: integral = 0.214104
+                          std dev  = 0.001188
+                          chi**2 per it'n =     0.7141
+
+ << integration by vegas >>
+     iteration no.    8   integral=  0.210569
+                          std dev  = 0.003022
+     accumulated results: integral = 0.213658
+                          std dev  = 0.001106
+                          chi**2 per it'n =     0.7780
+
+ << integration by vegas >>
+     iteration no.    9   integral=  0.207241
+                          std dev  = 0.003467
+     accumulated results: integral = 0.213113
+                          std dev  = 0.001053
+                          chi**2 per it'n =     1.0484
+
+ << integration by vegas >>
+     iteration no.   10   integral=  0.208882
+                          std dev  = 0.004345
+     accumulated results: integral = 0.212893
+                          std dev  = 0.001022
+                          chi**2 per it'n =     1.0321
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 32768
+# No. of max. iterations    : 10
+# Desired accuracy          : 0.000001
+#=============================
+# Result                    : 2.12893e-01  +- 1.02156e-03  ( 0.4798 %)
+# Chisquare                 : 1.0321
+#=============================
+# Total Execution Time(sec) :     3.2687
+#=============================
+# Time for func calls (sec) :     3.2543 ( 99.56%)
+# Time for data transf (sec):     0.0008 (  0.02%)
+# Time for data fill (sec)  :     0.0043 (  0.13%)
+# Time for grid refine (sec):     0.0005 (  0.01%)
+#=============================
