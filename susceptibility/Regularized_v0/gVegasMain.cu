@@ -107,8 +107,13 @@ int main(int argc, char** argv)
   double resultsAllpts[num_qx];
   double errorAllpts[num_qx];
 
-  for(int i=0; i < num_qx; i++) {
+  for(int i=0; i < 25; i++) {
         qx_h = i * PI / (a_h * num_qx);
+
+        std::cout<<"#============================="<<std::endl;
+        std::cout<<"# Current qx  : "<<qx_h<<std::endl;
+        std::cout<<"#============================="<<std::endl;
+
         double startTotal, endTotal, timeTotal;
         timeTotal = 0.;
         startTotal = getrusage_usec();
@@ -179,7 +184,7 @@ int main(int argc, char** argv)
         cudaThreadExit();
   }
 
-  std::ofstream allqxout("allqxresults.csv");
+  std::ofstream allqxout("allqxresults2.csv");
 
   allqxout << "i,qx,X,stddev,time" << std::endl;
 

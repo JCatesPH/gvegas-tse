@@ -1,0 +1,1 @@
+sbatch --qos=gpu -J regchi4of4GPU --begin=2019-10-05T02:30:55 --requeue --mail-user=jmcates@crimson.ua.edu -o regchi4of4GPU.%j.out -t 16:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=100mb

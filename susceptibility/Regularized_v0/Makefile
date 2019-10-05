@@ -34,7 +34,7 @@
 ################################################################################
 
 # Add source files here
-EXECUTABLE	:= reg_chi
+EXECUTABLE	:= reg_chi_1of4
 
 # Cuda source files (compiled with cudacc)
 CUFILES		:= gVegasMain.cu
