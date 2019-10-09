@@ -1,0 +1,1488 @@
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: reg_chi_2of4
+  The time limit is 12:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/susceptibility/Regularized_v0
+  The working directory is:  /scratch-local/ualjmc.regchi2of4GPU.336421
+  The memory limit is: 1gb
+  The job will start running after: 2019-10-09T13:12:27
+  Job Name: regchi2of4GPU
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Using  1  cores on master node  dmc3
+  Node list:  dmc3
+  Nodes:  dmc3
+  Command typed:
+/apps/scripts/run_gpu reg_chi_2of4     
+  Queue submit command:
+sbatch --qos=gpu -J regchi2of4GPU --begin=2019-10-09T13:12:27 --requeue --mail-user=jmcates@crimson.ua.edu -o regchi2of4GPU.o336421 -t 12:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=1000mb  
+ 
+Assigning GPU 1 to this job.
+#=============================
+# Current qx  : 0.218433
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.142614
+                          std dev  = 0.009232
+     accumulated results: integral = 0.142614
+                          std dev  = 0.009232
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.129453
+                          std dev  = 0.001330
+     accumulated results: integral = 0.129777
+                          std dev  = 0.001382
+                          chi**2 per it'n =     2.1737
+
+ << integration by vegas >>
+     iteration no.    3   integral=  0.128804
+                          std dev  = 0.000742
+     accumulated results: integral = 0.129041
+                          std dev  = 0.000670
+                          chi**2 per it'n =     1.3206
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.29041e-01  +- 6.69952e-04  ( 0.5192 %)
+# Chisquare                 : 1.3206
+#=============================
+# Total Execution Time(sec) :    25.1613
+#=============================
+# Time for func calls (sec) :    25.0832 ( 99.69%)
+# Time for data transf (sec):     0.0078 (  0.03%)
+# Time for data fill (sec)  :     0.0625 (  0.25%)
+# Time for grid refine (sec):     0.0002 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.23
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.130220
+                          std dev  = 0.008635
+     accumulated results: integral = 0.130220
+                          std dev  = 0.008635
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.121344
+                          std dev  = 0.001222
+     accumulated results: integral = 0.121544
+                          std dev  = 0.001253
+                          chi**2 per it'n =     1.1056
+
+ << integration by vegas >>
+     iteration no.    3   integral=  0.121856
+                          std dev  = 0.000715
+     accumulated results: integral = 0.121775
+                          std dev  = 0.000630
+                          chi**2 per it'n =     0.5880
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.21775e-01  +- 6.29632e-04  ( 0.5170 %)
+# Chisquare                 : 0.5880
+#=============================
+# Total Execution Time(sec) :    25.1592
+#=============================
+# Time for func calls (sec) :    25.0830 ( 99.70%)
+# Time for data transf (sec):     0.0057 (  0.02%)
+# Time for data fill (sec)  :     0.0622 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.24
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.119844
+                          std dev  = 0.010516
+     accumulated results: integral = 0.119844
+                          std dev  = 0.010516
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.115225
+                          std dev  = 0.001097
+     accumulated results: integral = 0.115279
+                          std dev  = 0.001112
+                          chi**2 per it'n =     0.1981
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.15279e-01  +- 1.11246e-03  ( 0.9650 %)
+# Chisquare                 : 0.1981
+#=============================
+# Total Execution Time(sec) :    16.8219
+#=============================
+# Time for func calls (sec) :    16.7658 ( 99.67%)
+# Time for data transf (sec):     0.0048 (  0.03%)
+# Time for data fill (sec)  :     0.0411 (  0.24%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.24
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.110658
+                          std dev  = 0.008299
+     accumulated results: integral = 0.110658
+                          std dev  = 0.008299
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.112733
+                          std dev  = 0.001025
+     accumulated results: integral = 0.112703
+                          std dev  = 0.001008
+                          chi**2 per it'n =     0.0604
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.12703e-01  +- 1.00841e-03  ( 0.8948 %)
+# Chisquare                 : 0.0604
+#=============================
+# Total Execution Time(sec) :    16.7887
+#=============================
+# Time for func calls (sec) :    16.7352 ( 99.68%)
+# Time for data transf (sec):     0.0029 (  0.02%)
+# Time for data fill (sec)  :     0.0414 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.25
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.110654
+                          std dev  = 0.008814
+     accumulated results: integral = 0.110654
+                          std dev  = 0.008814
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.110199
+                          std dev  = 0.000967
+     accumulated results: integral = 0.110205
+                          std dev  = 0.000963
+                          chi**2 per it'n =     0.0026
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.10205e-01  +- 9.62893e-04  ( 0.8737 %)
+# Chisquare                 : 0.0026
+#=============================
+# Total Execution Time(sec) :    16.6801
+#=============================
+# Time for func calls (sec) :    16.6244 ( 99.67%)
+# Time for data transf (sec):     0.0039 (  0.02%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.26
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.116475
+                          std dev  = 0.007954
+     accumulated results: integral = 0.116475
+                          std dev  = 0.007954
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.106879
+                          std dev  = 0.000917
+     accumulated results: integral = 0.107029
+                          std dev  = 0.000952
+                          chi**2 per it'n =     1.5557
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.07029e-01  +- 9.51831e-04  ( 0.8893 %)
+# Chisquare                 : 1.5557
+#=============================
+# Total Execution Time(sec) :    16.7008
+#=============================
+# Time for func calls (sec) :    16.6482 ( 99.68%)
+# Time for data transf (sec):     0.0029 (  0.02%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0000 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.27
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.109140
+                          std dev  = 0.007415
+     accumulated results: integral = 0.109140
+                          std dev  = 0.007415
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.102730
+                          std dev  = 0.000859
+     accumulated results: integral = 0.102826
+                          std dev  = 0.000879
+                          chi**2 per it'n =     0.7805
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.02826e-01  +- 8.79113e-04  ( 0.8550 %)
+# Chisquare                 : 0.7805
+#=============================
+# Total Execution Time(sec) :    17.0598
+#=============================
+# Time for func calls (sec) :    17.0041 ( 99.67%)
+# Time for data transf (sec):     0.0025 (  0.01%)
+# Time for data fill (sec)  :     0.0417 (  0.24%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.28
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.096554
+                          std dev  = 0.006632
+     accumulated results: integral = 0.096554
+                          std dev  = 0.006632
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.100517
+                          std dev  = 0.000777
+     accumulated results: integral = 0.100467
+                          std dev  = 0.000757
+                          chi**2 per it'n =     0.3383
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 1.00467e-01  +- 7.56591e-04  ( 0.7531 %)
+# Chisquare                 : 0.3383
+#=============================
+# Total Execution Time(sec) :    16.7639
+#=============================
+# Time for func calls (sec) :    16.7037 ( 99.64%)
+# Time for data transf (sec):     0.0048 (  0.03%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.29
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.111628
+                          std dev  = 0.006427
+     accumulated results: integral = 0.111628
+                          std dev  = 0.006427
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.097245
+                          std dev  = 0.000714
+     accumulated results: integral = 0.097475
+                          std dev  = 0.000762
+                          chi**2 per it'n =     5.6040
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 9.74748e-02  +- 7.62354e-04  ( 0.7821 %)
+# Chisquare                 : 5.6040
+#=============================
+# Total Execution Time(sec) :    16.9392
+#=============================
+# Time for func calls (sec) :    16.8861 ( 99.69%)
+# Time for data transf (sec):     0.0058 (  0.03%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.30
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.098393
+                          std dev  = 0.005751
+     accumulated results: integral = 0.098393
+                          std dev  = 0.005751
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.093640
+                          std dev  = 0.000661
+     accumulated results: integral = 0.093708
+                          std dev  = 0.000673
+                          chi**2 per it'n =     0.7067
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 9.37081e-02  +- 6.72766e-04  ( 0.7179 %)
+# Chisquare                 : 0.7067
+#=============================
+# Total Execution Time(sec) :    16.7745
+#=============================
+# Time for func calls (sec) :    16.7161 ( 99.65%)
+# Time for data transf (sec):     0.0045 (  0.03%)
+# Time for data fill (sec)  :     0.0416 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.31
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.093449
+                          std dev  = 0.005191
+     accumulated results: integral = 0.093449
+                          std dev  = 0.005191
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.092861
+                          std dev  = 0.000621
+     accumulated results: integral = 0.092869
+                          std dev  = 0.000618
+                          chi**2 per it'n =     0.0128
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 9.28690e-02  +- 6.18019e-04  ( 0.6655 %)
+# Chisquare                 : 0.0128
+#=============================
+# Total Execution Time(sec) :    16.7568
+#=============================
+# Time for func calls (sec) :    16.7004 ( 99.66%)
+# Time for data transf (sec):     0.0058 (  0.03%)
+# Time for data fill (sec)  :     0.0414 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.31
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.093698
+                          std dev  = 0.004777
+     accumulated results: integral = 0.093698
+                          std dev  = 0.004777
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.090991
+                          std dev  = 0.000588
+     accumulated results: integral = 0.091034
+                          std dev  = 0.000592
+                          chi**2 per it'n =     0.3252
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 9.10343e-02  +- 5.92154e-04  ( 0.6505 %)
+# Chisquare                 : 0.3252
+#=============================
+# Total Execution Time(sec) :    16.6590
+#=============================
+# Time for func calls (sec) :    16.6035 ( 99.67%)
+# Time for data transf (sec):     0.0039 (  0.02%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0002 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.32
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.085212
+                          std dev  = 0.004674
+     accumulated results: integral = 0.085212
+                          std dev  = 0.004674
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.088938
+                          std dev  = 0.000559
+     accumulated results: integral = 0.088890
+                          std dev  = 0.000544
+                          chi**2 per it'n =     0.6005
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 8.88901e-02  +- 5.43530e-04  ( 0.6115 %)
+# Chisquare                 : 0.6005
+#=============================
+# Total Execution Time(sec) :    16.4852
+#=============================
+# Time for func calls (sec) :    16.4278 ( 99.65%)
+# Time for data transf (sec):     0.0058 (  0.03%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.33
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.080757
+                          std dev  = 0.003426
+     accumulated results: integral = 0.080757
+                          std dev  = 0.003426
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.082687
+                          std dev  = 0.000542
+     accumulated results: integral = 0.082642
+                          std dev  = 0.000530
+                          chi**2 per it'n =     0.3028
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 8.26422e-02  +- 5.29687e-04  ( 0.6409 %)
+# Chisquare                 : 0.3028
+#=============================
+# Total Execution Time(sec) :    16.6389
+#=============================
+# Time for func calls (sec) :    16.5841 ( 99.67%)
+# Time for data transf (sec):     0.0035 (  0.02%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.34
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.086653
+                          std dev  = 0.003322
+     accumulated results: integral = 0.086653
+                          std dev  = 0.003322
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.077220
+                          std dev  = 0.000577
+     accumulated results: integral = 0.077565
+                          std dev  = 0.000602
+                          chi**2 per it'n =     8.6596
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 7.75654e-02  +- 6.01999e-04  ( 0.7761 %)
+# Chisquare                 : 8.6596
+#=============================
+# Total Execution Time(sec) :    16.8991
+#=============================
+# Time for func calls (sec) :    16.8410 ( 99.66%)
+# Time for data transf (sec):     0.0045 (  0.03%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.35
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.073815
+                          std dev  = 0.003616
+     accumulated results: integral = 0.073815
+                          std dev  = 0.003616
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.075249
+                          std dev  = 0.000534
+     accumulated results: integral = 0.075219
+                          std dev  = 0.000524
+                          chi**2 per it'n =     0.1509
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 7.52193e-02  +- 5.23833e-04  ( 0.6964 %)
+# Chisquare                 : 0.1509
+#=============================
+# Total Execution Time(sec) :    16.6490
+#=============================
+# Time for func calls (sec) :    16.5895 ( 99.64%)
+# Time for data transf (sec):     0.0048 (  0.03%)
+# Time for data fill (sec)  :     0.0416 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.36
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.075440
+                          std dev  = 0.002692
+     accumulated results: integral = 0.075440
+                          std dev  = 0.002692
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.071838
+                          std dev  = 0.000507
+     accumulated results: integral = 0.071974
+                          std dev  = 0.000510
+                          chi**2 per it'n =     1.8071
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 7.19737e-02  +- 5.10180e-04  ( 0.7088 %)
+# Chisquare                 : 1.8071
+#=============================
+# Total Execution Time(sec) :    16.8575
+#=============================
+# Time for func calls (sec) :    16.7973 ( 99.64%)
+# Time for data transf (sec):     0.0039 (  0.02%)
+# Time for data fill (sec)  :     0.0414 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.37
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.071936
+                          std dev  = 0.003255
+     accumulated results: integral = 0.071936
+                          std dev  = 0.003255
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.071023
+                          std dev  = 0.000490
+     accumulated results: integral = 0.071044
+                          std dev  = 0.000487
+                          chi**2 per it'n =     0.0779
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 7.10439e-02  +- 4.87499e-04  ( 0.6862 %)
+# Chisquare                 : 0.0779
+#=============================
+# Total Execution Time(sec) :    16.6609
+#=============================
+# Time for func calls (sec) :    16.6066 ( 99.67%)
+# Time for data transf (sec):     0.0048 (  0.03%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.38
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.070533
+                          std dev  = 0.002271
+     accumulated results: integral = 0.070533
+                          std dev  = 0.002271
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.069631
+                          std dev  = 0.000426
+     accumulated results: integral = 0.069662
+                          std dev  = 0.000422
+                          chi**2 per it'n =     0.1542
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 6.96620e-02  +- 4.21571e-04  ( 0.6052 %)
+# Chisquare                 : 0.1542
+#=============================
+# Total Execution Time(sec) :    16.8786
+#=============================
+# Time for func calls (sec) :    16.8219 ( 99.66%)
+# Time for data transf (sec):     0.0029 (  0.02%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.38
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.070859
+                          std dev  = 0.002542
+     accumulated results: integral = 0.070859
+                          std dev  = 0.002542
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.067794
+                          std dev  = 0.000339
+     accumulated results: integral = 0.067852
+                          std dev  = 0.000343
+                          chi**2 per it'n =     1.4892
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 6.78518e-02  +- 3.43108e-04  ( 0.5057 %)
+# Chisquare                 : 1.4892
+#=============================
+# Total Execution Time(sec) :    16.8172
+#=============================
+# Time for func calls (sec) :    16.7635 ( 99.68%)
+# Time for data transf (sec):     0.0039 (  0.02%)
+# Time for data fill (sec)  :     0.0414 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.39
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.067877
+                          std dev  = 0.002642
+     accumulated results: integral = 0.067877
+                          std dev  = 0.002642
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.066821
+                          std dev  = 0.000299
+     accumulated results: integral = 0.066835
+                          std dev  = 0.000300
+                          chi**2 per it'n =     0.1602
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 6.68346e-02  +- 2.99594e-04  ( 0.4483 %)
+# Chisquare                 : 0.1602
+#=============================
+# Total Execution Time(sec) :    17.1864
+#=============================
+# Time for func calls (sec) :    17.1300 ( 99.67%)
+# Time for data transf (sec):     0.0055 (  0.03%)
+# Time for data fill (sec)  :     0.0416 (  0.24%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.40
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.062322
+                          std dev  = 0.001553
+     accumulated results: integral = 0.062322
+                          std dev  = 0.001553
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.060768
+                          std dev  = 0.000244
+     accumulated results: integral = 0.060808
+                          std dev  = 0.000244
+                          chi**2 per it'n =     0.9992
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 6.08075e-02  +- 2.44205e-04  ( 0.4016 %)
+# Chisquare                 : 0.9992
+#=============================
+# Total Execution Time(sec) :    16.7412
+#=============================
+# Time for func calls (sec) :    16.6840 ( 99.66%)
+# Time for data transf (sec):     0.0029 (  0.02%)
+# Time for data fill (sec)  :     0.0408 (  0.24%)
+# Time for grid refine (sec):     0.0002 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.41
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.058849
+                          std dev  = 0.001488
+     accumulated results: integral = 0.058849
+                          std dev  = 0.001488
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.057316
+                          std dev  = 0.000251
+     accumulated results: integral = 0.057361
+                          std dev  = 0.000250
+                          chi**2 per it'n =     1.0575
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 5.73607e-02  +- 2.50166e-04  ( 0.4361 %)
+# Chisquare                 : 1.0575
+#=============================
+# Total Execution Time(sec) :    16.8448
+#=============================
+# Time for func calls (sec) :    16.7922 ( 99.69%)
+# Time for data transf (sec):     0.0009 (  0.01%)
+# Time for data fill (sec)  :     0.0413 (  0.25%)
+# Time for grid refine (sec):     0.0002 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.42
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.056608
+                          std dev  = 0.001393
+     accumulated results: integral = 0.056608
+                          std dev  = 0.001393
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.054480
+                          std dev  = 0.000232
+     accumulated results: integral = 0.054542
+                          std dev  = 0.000234
+                          chi**2 per it'n =     2.3528
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 5.45424e-02  +- 2.33511e-04  ( 0.4281 %)
+# Chisquare                 : 2.3528
+#=============================
+# Total Execution Time(sec) :    16.6624
+#=============================
+# Time for func calls (sec) :    16.6073 ( 99.67%)
+# Time for data transf (sec):     0.0035 (  0.02%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================
+#=============================
+# Current qx  : 0.43
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  100
+     acc  =     0.010
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+
+ << integration by vegas >>
+     iteration no.    1   integral=  0.053934
+                          std dev  = 0.001269
+     accumulated results: integral = 0.053934
+                          std dev  = 0.001269
+
+ << integration by vegas >>
+     iteration no.    2   integral=  0.052778
+                          std dev  = 0.000224
+     accumulated results: integral = 0.052814
+                          std dev  = 0.000223
+                          chi**2 per it'n =     0.8207
+
+#=============================
+# No. of Thread Block Size  : 256
+#=============================
+# No. of dimensions         : 3
+# No. of func calls / iter  : 1024000
+# No. of max. iterations    : 100
+# Desired accuracy          : 0.010000
+#=============================
+# Result                    : 5.28144e-02  +- 2.22922e-04  ( 0.4221 %)
+# Chisquare                 : 0.8207
+#=============================
+# Total Execution Time(sec) :    16.9851
+#=============================
+# Time for func calls (sec) :    16.9281 ( 99.66%)
+# Time for data transf (sec):     0.0035 (  0.02%)
+# Time for data fill (sec)  :     0.0417 (  0.25%)
+# Time for grid refine (sec):     0.0001 (  0.00%)
+#=============================

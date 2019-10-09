@@ -235,7 +235,7 @@ float func(double *rx, double wgt)
                 //for n in range(0, N):
                 for(int n=0; n<N; n++) {
                     //chi1f += Grkq[IDX2C(m,n,N)] * Grk[IDX2C(n,l,N)] * Gak[IDX2C(l,m,N)] + Grkq[IDX2C(n,l,N)] * Gakq[IDX2C(l,m,N)] * Gak[IDX2C(m,n,N)];
-                    theta = make_cuDoubleComplex(fermi(mu-rx[0] + ((N - 1) / 2 - l) * hOmg, mu), 0); // CHANGED
+                    theta = make_cuDoubleComplex(fermi(rx[0] - ((N - 1) / 2 - l) * hOmg, mu), 0); // CHANGED
                     chi1f = cuCadd(
                         chi1f,
                         cuCadd(

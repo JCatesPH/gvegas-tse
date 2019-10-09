@@ -44,11 +44,11 @@ int main(int argc, char** argv)
   int nBlockSize0 = 256;
   int GPUdevice = 0;
 
-  float acc0 = 0.1f;
+  float acc0 = 0.01f;
 
   ncall = 1024*1000;
   itmx = itmx0;
-  acc = 0.01*acc0;
+  acc = acc0;
   nBlockSize = nBlockSize0;
 
   cudaSetDevice(GPUdevice);
