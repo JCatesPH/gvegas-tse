@@ -111,7 +111,7 @@ int main(int argc, char** argv)
         qx_h = i * PI / (a_h * num_qx);
 
         std::cout<<"#============================="<<std::endl;
-        std::cout<<"# Current qx  : "<<qx_h<<std::endl;
+        std::cout<<"# i, qx  : "<<i<<", "<<qx_h<<std::endl;
         std::cout<<"#============================="<<std::endl;
 
         double startTotal, endTotal, timeTotal;
