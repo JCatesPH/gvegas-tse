@@ -44,7 +44,7 @@ int main(int argc, char** argv)
   int nBlockSize0 = 256;
   int GPUdevice = 0;
 
-  float acc0 = 0.01f;
+  float acc0 = 0.0001f;
 
   ncall = 1024*1000;
   itmx = itmx0;
@@ -81,7 +81,7 @@ int main(int argc, char** argv)
   //----------------------------------
   //  Set parameters in the integrand.
   //----------------------------------
-  mu_h     = 0.14f;
+  mu_h     = 0.115f;
   hOmg_h   = 0.3f;
   a_h      = 3.56f;
   t0_h      = 4.f;
@@ -110,7 +110,7 @@ int main(int argc, char** argv)
   for(int i=75; i < num_qx; i++) {
         qx_h = i * PI / (a_h * num_qx);
 
-        std::cout<<"#============================="<<std::endl;
+        std::cout<<std::endl<<"#============================="<<std::endl;
         std::cout<<"# i, qx  : "<<i<<", "<<qx_h<<std::endl;
         std::cout<<"#============================="<<std::endl;
 
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
         cudaThreadExit();
   }
 
-  std::ofstream allqxout("allqxresults4.csv");
+  std::ofstream allqxout("qxresults4_newmu.csv");
 
   allqxout << "i,qx,X,stddev,time" << std::endl;
 
