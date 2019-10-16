@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   //  Initialization
   //------------------
 
-  int itmx0 = 100;
+  int itmx0 = 200;
   int nBlockSize0 = 256;
   int GPUdevice = 0;
 
@@ -81,7 +81,7 @@ int main(int argc, char** argv)
   //----------------------------------
   //  Set parameters in the integrand.
   //----------------------------------
-  mu_h     = 0.115f;
+  mu_h     = 0.14f;
   hOmg_h   = 0.3f;
   a_h      = 3.56f;
   t0_h      = 4.f;
