@@ -1,0 +1,53 @@
+setting dmc scratch directory
+ 
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: reg_chi_1of4_mu2
+  The time limit is 12:00:00 HH:MM:SS.
+  The target directory is: /home/ualjmc/gvegas-tse/susceptibility/Regularized_v0
+  The working directory is:  /scratch-local/ualjmc.regchi1of4mu2GPU.338044
+  The memory limit is: 20mb
+  The job will start running after: 2019-10-16T14:18:57
+  Job Name: regchi1of4mu2GPU
+  Virtual queue: gpu
+  QOS: --qos=gpu
+  Constraints: 
+  Using  1  cores on master node  dmc202
+  Node list:  dmc202
+  Nodes:  dmc202
+  Command typed:
+/apps/scripts/run_gpu reg_chi_1of4_mu2     
+  Queue submit command:
+sbatch --qos=gpu -J regchi1of4mu2GPU --begin=2019-10-16T14:18:57 --requeue --mail-user=jmcates@crimson.ua.edu -o regchi1of4mu2GPU.o338044 -t 12:00:00 --gres=gpu:1 -N 1-1 -n 1 --mem-per-cpu=20mb  
+ 
+Assigning GPU 2 to this job.
+
+#=============================
+# i, qx  : 0, 0
+#=============================
+
+ << vegas internal parameters >>
+            ng:    78
+            nd:    39
+           npg:     2
+        nCubes:       474552
+    nCubes*npg:       949104
+
+ << input parameters for vegas >>
+     ndim =  3   ncall =    949104
+     it   =  0   itmx =  200
+     acc  =     0.000
+     mds  = -1   nd =   39
+    (xl,xu)= ( -0.150 , 0.150 )
+    (xl,xu)= ( -0.882 , 0.882 )
+    (xl,xu)= ( -0.882 , 0.882 )
+
+ << kernel parameters for CUDA >>
+       Block size           =    256
+       Grid size            =   3708 x 1
+     Actual Number of calls =      949248
+   Required Number of calls =      949104 (  99.98%)
+
+/var/spool/slurmd/job338044/slurm_script: line 65: 11861 Killed                  ./reg_chi_1of4_mu2
+slurmstepd: error: Detected 1 oom-kill event(s) in step 338044.batch cgroup.
