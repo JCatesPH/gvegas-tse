@@ -60,18 +60,18 @@ CUDACCFLAGS := -w -lcublas -lcurand -lcudadevrt -lcudart -lgomp -O 0
 ################################################################################
 # Rules and targets
 .PHONY: all
-all: reg_chi_1of4_mu2 reg_chi_2of4_mu2 reg_chi_3of4_mu2 reg_chi_4of4_mu2
+all: reg_chi_1of4 reg_chi_2of4 reg_chi_3of4 reg_chi_4of4
 
-reg_chi_1of4_mu2 :  $(SRCDIR)/gVegasMain1.cu $(CU_DEPS) $(CCFILES) $(HFILES)
+reg_chi_1of4 :  $(SRCDIR)/gVegasMain1.cu $(CU_DEPS) $(CCFILES) $(HFILES)
 	nvcc -o $@  $(SRCDIR)/gVegasMain1.cu $(CCFILES) $(CUDACCFLAGS)
 
-reg_chi_2of4_mu2 :  $(SRCDIR)/gVegasMain2.cu $(CU_DEPS) $(CCFILES) $(HFILES)
+reg_chi_2of4 :  $(SRCDIR)/gVegasMain2.cu $(CU_DEPS) $(CCFILES) $(HFILES)
 	nvcc -o $@  $(SRCDIR)/gVegasMain2.cu $(CCFILES) $(CUDACCFLAGS)
 
-reg_chi_3of4_mu2 :  $(SRCDIR)/gVegasMain3.cu $(CU_DEPS) $(CCFILES) $(HFILES)
+reg_chi_3of4 :  $(SRCDIR)/gVegasMain3.cu $(CU_DEPS) $(CCFILES) $(HFILES)
 	nvcc -o $@  $(SRCDIR)/gVegasMain3.cu $(CCFILES) $(CUDACCFLAGS)
 
-reg_chi_4of4_mu2 :  $(SRCDIR)/gVegasMain4.cu $(CU_DEPS) $(CCFILES) $(HFILES)
+reg_chi_4of4 :  $(SRCDIR)/gVegasMain4.cu $(CU_DEPS) $(CCFILES) $(HFILES)
 	nvcc -o $@  $(SRCDIR)/gVegasMain4.cu $(CCFILES) $(CUDACCFLAGS)
 
 .PHONY: clean
