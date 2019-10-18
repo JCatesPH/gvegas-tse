@@ -44,9 +44,9 @@ int main(int argc, char** argv)
   int nBlockSize0 = 256;
   int GPUdevice = 0;
 
-  float acc0 = 0.0001f;
+  float acc0 = 0.001f;
 
-  ncall = 1024*1000;
+  ncall = 1024*10000;
   itmx = itmx0;
   acc = acc0;
   nBlockSize = nBlockSize0;
