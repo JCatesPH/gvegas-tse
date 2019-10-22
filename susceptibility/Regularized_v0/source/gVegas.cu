@@ -82,6 +82,27 @@ void gVegas(double& avgi, double& sd, double& chi2a)
    cudaMemcpyToSymbol(g_dxg,  &dxg,  sizeof(double));
    cudaThreadSynchronize(); // wait for synchronize
 
+   //----------------------------------
+   //  Set parameters in the integrand.
+   //----------------------------------
+   mu_h     = 0.14f;
+   hOmg_h   = 0.3f;
+   a_h      = 3.56f;
+   t0_h      = 4.f;
+   eA0a_h   = 0.35f;
+   Gamm_h   = 0.003f;
+   j0_h     = 0.969608676323187;
+   j1_h     = 0.172333955218708;
+   Gammsq_h = Gamm_h * Gamm_h;
+   N_h      = 7;
+   N2_h     = (N_h - 1) / 2;
+
+   V0_h     = 2 * j0_h;
+   V1_h     = j1_h;
+   Fac_h    = -(a_h * a_h * Gamm_h / (PI*PI));
+   qx_h     = 0.1; //0.01f + (PI / a_h) * 30.f / 50.f;
+   qy_h     = 0.f;
+   
    // Move the parameters to the GPU memory.
    cudaMemcpyToSymbol(mu,          &mu_h,  sizeof(float));
    cudaMemcpyToSymbol(hOmg,      &hOmg_h,  sizeof(float));
