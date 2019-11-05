@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   //  Initialization
   //------------------
 
-  int itmx0 = 200;
+  int itmx0 = 300;
   int nBlockSize0 = 256;
   int GPUdevice = 0;
 
